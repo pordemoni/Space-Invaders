@@ -10,14 +10,16 @@
       > controls
          - movement
          > shooting 
-            - random delay on shooting
+            x random delay on shooting
       - graphics
 
 > Game mechanics
+   x Projectile collision & edge detection
    > Spawns
       - single-line spawn
 
 > UI
    - stars
-   > Added feautres
+   > Additional feautres
       - player smoke/fire trail
+      - Projectile collision effects
