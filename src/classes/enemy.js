@@ -3,11 +3,8 @@ class Enemy {
         this.position = position;
         this.width = 20;
         this.height = 20;
+        this.fire_rate = 3000;
         this.firing;
-        this.laser = {
-           rate: 3000,
-           speed: 4
-        },
         this.type = "ENEMY";
     }
 
@@ -21,6 +18,6 @@ class Enemy {
     }
 
     fire() {
-      this.firing = spawn_lasers(this);
+      this.firing = spawn_missile(this);
     }
 }

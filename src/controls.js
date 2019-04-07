@@ -45,3 +45,7 @@ function keyReleased(event) {
          break;
 	}
 }
+
+function mouseClicked(event) {
+   console.log(mouseX);
+}

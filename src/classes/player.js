@@ -3,13 +3,10 @@ class Player {
       this.position = position;
       this.width = 50;
       this.height = 50;
-      this.type = "PLAYER";
+      this.fire_rate = 250;
       this.firing;
-      this.laser = {
-         rate: 250,
-         speed: 10
-      },
       this.turn_speed = 10;
+      this.type = "PLAYER";
       this.boost_directions = {
          left: {
             speed: {current: 0, max: this.turn_speed},
@@ -31,7 +28,7 @@ class Player {
    }
 
    render() {
-      fill(0, 255, 0);
+      fill(0, 0, 255);
       rect(this.position.x, this.position.y, this.width, this.height);
    }
 
