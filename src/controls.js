@@ -1,3 +1,4 @@
+let player_fire;
 function keyPressed(event) {
 	switch (keyCode) {
 		case LEFT_ARROW:

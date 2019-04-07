@@ -1,9 +1,13 @@
 class Enemy {
     constructor(position) {
-        this.positionn = position;
+        this.position = position;
         this.width = 20;
         this.height = 20;
-        this.fire_rate = 4000;
+        this.firing;
+        this.laser = {
+           rate: 3000,
+           speed: 4
+        },
         this.type = "ENEMY";
     }
 
@@ -14,5 +18,9 @@ class Enemy {
     
     update() {
         
+    }
+
+    fire() {
+      this.firing = spawn_lasers(this);
     }
 }

@@ -3,13 +3,20 @@ class Player {
       this.position = position;
       this.width = 50;
       this.height = 50;
-      this.boosts = {
+      this.type = "PLAYER";
+      this.firing;
+      this.laser = {
+         rate: 250,
+         speed: 10
+      },
+      this.turn_speed = 10;
+      this.boost_directions = {
          left: {
-            speed: {current: 0, max: 8},
+            speed: {current: 0, max: this.turn_speed},
             drag: {current: 1, no_drag: 1, max: 0.9}
          },
          right: {
-            speed: {current: 0, max: 8},
+            speed: {current: 0, max: this.turn_speed},
             drag: {current: 1, no_drag: 1, max: 0.9}
          },
          forward: {
@@ -21,8 +28,6 @@ class Player {
             drag: {current: 1, no_drag: 1, max: 0.9}
          },
       };
-      this.type = "PLAYER";
-      this.fire_rate = 500;
    }
 
    render() {
@@ -39,10 +44,10 @@ class Player {
    * Firing
    */
    fire() {
-      shoot_lasers = spawn_lasers(this);
+      this.firing = spawn_lasers(this);
    }
    cease_fire() {
-      window.clearInterval(shoot_lasers);
+      window.clearInterval(this.firing);
    }
 
    /* 
@@ -52,18 +57,18 @@ class Player {
    */
    boosting() {
       // ? Left & right turns
-      this.position.x -= this.boosts.left.speed.current;
-      this.position.x += this.boosts.right.speed.current;
+      this.position.x -= this.boost_directions.left.speed.current;
+      this.position.x += this.boost_directions.right.speed.current;
       
       // ? Forward & backward thrusts
-      this.position.y -= this.boosts.forward.speed.current;
-      this.position.y += this.boosts.backward.speed.current;
+      this.position.y -= this.boost_directions.forward.speed.current;
+      this.position.y += this.boost_directions.backward.speed.current;
 
       // ? Applies "drag"
-      this.boosts.left.speed.current *= this.boosts.left.drag.current;
-      this.boosts.right.speed.current *= this.boosts.right.drag.current;
-      this.boosts.forward.speed.current *= this.boosts.forward.drag.current;
-      this.boosts.backward.speed.current *= this.boosts.backward.drag.current;
+      this.boost_directions.left.speed.current *= this.boost_directions.left.drag.current;
+      this.boost_directions.right.speed.current *= this.boost_directions.right.drag.current;
+      this.boost_directions.forward.speed.current *= this.boost_directions.forward.drag.current;
+      this.boost_directions.backward.speed.current *= this.boost_directions.backward.drag.current;
    }
    
    /*  
@@ -73,25 +78,25 @@ class Player {
       ? temporarily remove the drag, which are then reapplied upon KEY RELEASE
    */
    boost_left() {
-      this.boosts.left.speed.current = this.boosts.left.speed.max;
+      this.boost_directions.left.speed.current = this.boost_directions.left.speed.max;
       
       // ? Removes "drag"
-      this.boosts.left.drag.current = this.boosts.left.drag.no_drag;
+      this.boost_directions.left.drag.current = this.boost_directions.left.drag.no_drag;
    }
 
    boost_right() {
-      this.boosts.right.speed.current = this.boosts.right.speed.max;
-      this.boosts.right.drag.current = this.boosts.right.drag.no_drag;
+      this.boost_directions.right.speed.current = this.boost_directions.right.speed.max;
+      this.boost_directions.right.drag.current = this.boost_directions.right.drag.no_drag;
    }
 
    boost_forward() {
-      this.boosts.forward.speed.current = this.boosts.forward.speed.max;
-      this.boosts.forward.drag.current = this.boosts.forward.drag.no_drag;
+      this.boost_directions.forward.speed.current = this.boost_directions.forward.speed.max;
+      this.boost_directions.forward.drag.current = this.boost_directions.forward.drag.no_drag;
    }
 
    boost_backward() {
-      this.boosts.backward.speed.current = this.boosts.backward.speed.max;
-      this.boosts.backward.drag.current = this.boosts.backward.drag.no_drag;
+      this.boost_directions.backward.speed.current = this.boost_directions.backward.speed.max;
+      this.boost_directions.backward.drag.current = this.boost_directions.backward.drag.no_drag;
    }
 
    /*  
@@ -99,19 +104,19 @@ class Player {
       ? set the current drag to the max drag
    */
    apply_drag_left() {
-      this.boosts.left.drag.current = this.boosts.left.drag.max;
+      this.boost_directions.left.drag.current = this.boost_directions.left.drag.max;
    }
 
    apply_drag_right() {
-      this.boosts.right.drag.current = this.boosts.right.drag.max;
+      this.boost_directions.right.drag.current = this.boost_directions.right.drag.max;
    }
 
    apply_drag_forward() {
-      this.boosts.forward.drag.current = this.boosts.forward.drag.max;
+      this.boost_directions.forward.drag.current = this.boost_directions.forward.drag.max;
    }
 
    apply_drag_backward() {
-      this.boosts.backward.drag.current = this.boosts.backward.drag.max;
+      this.boost_directions.backward.drag.current = this.boost_directions.backward.drag.max;
    }
 
    constrain_edges() {
