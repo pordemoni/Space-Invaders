@@ -48,7 +48,7 @@ class Player {
    /* 
    * Boosting
       ? by default, the current speeds are set to 0, and
-      ? the speeds are multiplied by the drag, which is currently 1 
+      ? the speeds are multiplied by the drag, which is currently set to 1 
    */
    boosting() {
       // ? Left & right turns

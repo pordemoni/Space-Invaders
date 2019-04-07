@@ -3,7 +3,7 @@ class Enemy {
         this.positionn = position;
         this.width = 20;
         this.height = 20;
-        this.fireRate = 4000;
+        this.fire_rate = 4000;
         this.type = "ENEMY";
     }
 

@@ -1,7 +1,8 @@
 class Laser {
-    constructor(x, y, type) {
-        this.position = createVector(x, y);
-        this.type = type;
+    constructor(origin) {
+        this.position = createVector(origin.position.x, origin.position.y);
+        this.velocity = createVector();
+        this.type = origin.type;
 
         switch (this.type) {
             case "PLAYER":
@@ -20,7 +21,14 @@ class Laser {
     }
 
     update() {
-        this.position.y -= this.speed;
+       switch (this.type) {
+         case "PLAYER":
+            this.position.y -= this.speed;
+            break;
+
+         case "ENEMY":
+
+       }
     }
 
     render() {
