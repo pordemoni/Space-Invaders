@@ -1,0 +1,23 @@
+* CHECKLIST
+
+> Spaceship
+   > player
+      > controls
+         x movement
+         x shooting
+      - graphics
+   > enemy
+      > controls
+         - movement
+         > shooting 
+            - random delay on shooting
+      - graphics
+
+> Game mechanics
+   > Spawns
+      - single-line spawn
+
+> UI
+   - stars
+   > Added feautres
+      - player smoke/fire trail
