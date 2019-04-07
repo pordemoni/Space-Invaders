@@ -1,34 +1,35 @@
 class Player {
    constructor(position) {
       this.position = position;
-      this.width = 50;
-      this.height = 50;
-      this.fire_rate = 250;
-      this.firing;
-      this.turn_speed = 10;
+      this.width = 14;
+      this.height = 14;
       this.type = "PLAYER";
+      this.firing;
+      this.fire_rate = 250;
+      this.drag_multiplier = 0.9;
+      this.turn_speed = 8;
       this.boost_directions = {
          left: {
             speed: {current: 0, max: this.turn_speed},
-            drag: {current: 1, no_drag: 1, max: 0.9}
+            drag: {current: 1, no_drag: 1, max: this.drag_multiplier}
          },
          right: {
             speed: {current: 0, max: this.turn_speed},
-            drag: {current: 1, no_drag: 1, max: 0.9}
+            drag: {current: 1, no_drag: 1, max: this.drag_multiplier}
          },
          forward: {
             speed: {current: 0, max: 6},
-            drag: {current: 1, no_drag: 1, max: 0.9}
+            drag: {current: 1, no_drag: 1, max: this.drag_multiplier}
          },
          backward: {
             speed: {current: 0, max: 6},
-            drag: {current: 1, no_drag: 1, max: 0.9}
+            drag: {current: 1, no_drag: 1, max: this.drag_multiplier}
          },
       };
    }
 
    render() {
-      fill(0, 0, 255);
+      fill(50, 520, 255);
       rect(this.position.x, this.position.y, this.width, this.height);
    }
 

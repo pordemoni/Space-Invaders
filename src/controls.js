@@ -1,5 +1,6 @@
 let player_fire;
 function keyPressed(event) {
+   // console.log(keyCode);
 	switch (keyCode) {
 		case LEFT_ARROW:
 			player.boost_left();
@@ -18,7 +19,6 @@ function keyPressed(event) {
       // ? "Space" key
       case 32:       
          player.fire();
-         // shoot_lasers = spawn_lasers();
          break;
 	}
 }
@@ -41,7 +41,6 @@ function keyReleased(event) {
          
       case 32: 
          player.cease_fire();
-         // window.clearInterval(shoot_lasers);
          break;
 	}
 }

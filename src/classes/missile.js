@@ -1,14 +1,15 @@
 class Missile extends Projectile {
    constructor(origin) {
       super(origin);
-      this.velocity = createVector(0, 4);
-      this.radius = 8;
+      this.height = 4;
+      this.width = 4;
       this.target_acquired = false;
+      this.velocity = createVector(0, 2);
    }
 
    render() {
       fill(255, 255, 0);
-      ellipse(this.position.x, this.position.y, this.radius);
+      ellipse(this.position.x, this.position.y, this.width, this.height);
    }
 
    update() {
@@ -23,11 +24,15 @@ class Missile extends Projectile {
       }
    }
    
-   set_direction(target) {
-      if (this.type == "ENEMY" && !this.target_acquired) {
-         let difference = p5.Vector.sub(target.position, this.position);
-         let direction = difference.normalize();
-         this.velocity = direction.copy().mult(this.velocity.y);
+   set_direction() {
+      if (!this.target_acquired) {
+         switch (this.type) {
+            case "ENEMY":
+               let difference = p5.Vector.sub(player.position, this.position);
+               let direction = difference.normalize();
+               this.velocity = direction.copy().mult(this.velocity.y);
+               break;
+         }
          this.target_acquired = true;
       }
    }

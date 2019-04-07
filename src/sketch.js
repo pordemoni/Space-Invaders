@@ -3,14 +3,15 @@ let enemies = [];
 let lasers = [];
 let missiles = [];
 
+let enemy;
 function setup() {
    createCanvas(document.body.clientWidth, window.innerHeight);
    angleMode(DEGREES);
-   rectMode(CENTER);
+   rectMode(RADIUS);
    ellipseMode(RADIUS);
    noStroke();
 
-   player = new Player(createVector(width / 2, height - 50));
+   player = new Player(createVector(width / 2, height - 60));
    for (let i = 0; i < 5; i++) {
       const position = createVector(random(width), 50);
       const enemy = new Enemy(position);
@@ -21,16 +22,27 @@ function setup() {
 
 function draw() {
    background(29, 44, 66);
+   // console.log(lasers.length);
    
    lasers.forEach(laser => {
       laser.render();
       laser.update();
+      laser.check_edges();
+      laser.check_collision();
+
+      const lindex = lasers.indexOf(laser);
+      if (laser.has_exploded) lasers.splice(lindex, 1);
    });
 
    missiles.forEach(missile => {
       missile.render();
       missile.update();
-      missile.set_direction(player);
+      missile.set_direction();
+      missile.check_edges();
+      missile.check_collision();
+
+      const index = missiles.indexOf(missile);
+      if (missile.has_exploded) missiles.splice(index, 1);
    })
 
    player.render();
@@ -40,7 +52,6 @@ function draw() {
       enemy.render();
       enemy.update();
    })
-
 }
 
 function windowResized() {
