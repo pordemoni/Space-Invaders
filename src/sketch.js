@@ -2,6 +2,7 @@ let player;
 let enemies = [];
 let lasers = [];
 let missiles = [];
+let projectiles = [];
 
 let enemy;
 function setup() {
@@ -12,38 +13,26 @@ function setup() {
    noStroke();
 
    player = new Player(createVector(width / 2, height - 60));
-   for (let i = 0; i < 10; i++) {
+   for (let i = 0; i < 1; i++) {
       const position = createVector(random(width), 50);
       const enemy = new Enemy(position);
       enemies.push(enemy);
-      // enemy.fire();
+      enemy.fire();
    }
 }
 
 function draw() {
    background(29, 44, 66);
-   // console.log(lasers.length);
-   
-   lasers.forEach(laser => {
-      laser.render();
-      laser.update();
-      laser.check_edges();
-      laser.check_collision();
+   projectiles.forEach(projectile => {
+      projectile.render();
+      projectile.set_direction();
+      projectile.update();
+      projectile.check_edges();
+      projectile.check_collision();
 
-      const index = lasers.indexOf(laser);
-      if (laser.exploded) lasers.splice(index, 1);
+      const index = projectiles.indexOf(projectile);
+      if (projectile.exploded) projectiles.splice(index, 1);
    });
-
-   missiles.forEach(missile => {
-      missile.render();
-      missile.update();
-      missile.set_direction();
-      missile.check_edges();
-      missile.check_collision();
-
-      const index = missiles.indexOf(missile);
-      if (missile.exploded) missiles.splice(index, 1);
-   })
 
    player.render();
    player.update();

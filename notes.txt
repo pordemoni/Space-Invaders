@@ -1,5 +1,17 @@
-* CHECKLIST
+TODO
+   > Look into incorporating frameCount!
 
+   > Fix firing mode cycling
+   ? The firing mode determines the Projectile type
+      ? issue: the spawned Projectiles only checks the firing mode upon key (spacebar) press, hence
+      ? on continuous firing (holding down of the spacebar), the Projectile type doesn't change until
+      ? the spacebar has been released and pressed again
+      
+      * Possible solutions:
+      - change the implementation of spawn_projectile()
+
+
+* CHECKLIST
 > Spaceship
    > player
       > controls
@@ -24,3 +36,6 @@
       ! turn the fire() methods from setInterval() based functions into frameCount based functions
       - player smoke/fire trail
       - Projectile collision effects
+
+
+      

@@ -1,6 +1,8 @@
-let player_fire;
+const SPACE = 32
+      LEFT_SHIFT = 16;
+
 function keyPressed(event) {
-   console.log(keyCode);
+   // console.log(keyCode);
 	switch (keyCode) {
 		case LEFT_ARROW:
 			player.boost_left();
@@ -8,21 +10,16 @@ function keyPressed(event) {
 		case RIGHT_ARROW:
 			player.boost_right();
 			break;
-
 		case UP_ARROW:
          player.boost_forward();
 			break;
 		case DOWN_ARROW:
          player.boost_backward();
          break;
-      
-      // ? Space key
-      case 32:       
+      case SPACE:       
          player.fire();
          break;
-
-      // ? (left) Shift key
-      case 16:
+      case LEFT_SHIFT:
          player.cycle_firing_mode();
          break;
 	}

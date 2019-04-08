@@ -10,12 +10,12 @@ class Projectile {
    }
 
    check_edges() {
-      return (
+      if (
          this.position.x <= -this.width * 2 ||
          this.position.x >= this.width * 2 + width ||
          this.position.y <= -this.height * 2 ||
          this.position.y >= this.height * 2 + height
-      )
+      ) this.exploded = true;
    }
 
    check_collision() {
@@ -40,5 +40,9 @@ class Projectile {
             ) this.exploded = true;
             break;
       }
+   }
+
+   set_direction() {
+
    }
 }
