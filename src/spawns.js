@@ -8,7 +8,7 @@
 */
 
 function spawn_projectile(origin) {
-   switch (origin.firing.mode) {
+   switch (origin.firing.mode.current) {
       case "LASER":
          lasers.push(new Laser(origin));
 

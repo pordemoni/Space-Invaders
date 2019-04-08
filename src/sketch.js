@@ -16,7 +16,7 @@ function setup() {
       const position = createVector(random(width), 50);
       const enemy = new Enemy(position);
       enemies.push(enemy);
-      enemy.fire();
+      // enemy.fire();
    }
 }
 

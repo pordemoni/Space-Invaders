@@ -5,8 +5,11 @@ class Player {
       this.height = 14;
       this.type = "PLAYER";
       this.firing = {
-         mode: "LASER",
          fire: function() {},
+         mode: {
+            modes: ["LASER", "MISSILE"],
+            current: "LASER"
+         },
          rate: 250,
       }
       this.fire_rate = 250;
@@ -50,6 +53,17 @@ class Player {
    }
    cease_fire() {
       window.clearInterval(this.firing.fire);
+   }
+   cycle_firing_mode() {
+      const modes = this.firing.mode.modes;
+      const current = this.firing.mode.current;
+
+      for (let i = 0; i < modes.length; i++) {
+         if (current != modes[i]) {
+            this.firing.mode.current = modes[i];
+            break;
+         }
+      }
    }
 
    /* 

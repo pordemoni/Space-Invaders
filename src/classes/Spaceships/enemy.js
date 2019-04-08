@@ -1,17 +1,17 @@
 class Enemy {
    constructor(position) {
-      this.fire_delay = random(0, 2000);
-      this.fire_rate = 3000;
+      this.width = 10;
+      this.height = 10;
+      this.position = position;
       this.firing = {
          delay: random(0, 2000),
          fire: function() {},
-         mode: "MISSILE",
+         mode: {
+            current: "MISSILE",
+         },
          rate: 3000,
       };
-      this.height = 10;
-      this.position = position;
       this.type = "ENEMY";
-      this.width = 10;
    }
 
    render() {

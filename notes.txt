@@ -21,5 +21,6 @@
 > UI
    - stars
    > Additional feautres
+      ! turn the fire() methods from setInterval() based functions into frameCount based functions
       - player smoke/fire trail
       - Projectile collision effects
