@@ -46,5 +46,5 @@ function keyReleased(event) {
 }
 
 function mouseClicked(event) {
-   console.log(mouseX);
+   // console.log(mouseX);
 }

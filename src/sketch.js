@@ -12,7 +12,7 @@ function setup() {
    noStroke();
 
    player = new Player(createVector(width / 2, height - 60));
-   for (let i = 0; i < 5; i++) {
+   for (let i = 0; i < 10; i++) {
       const position = createVector(random(width), 50);
       const enemy = new Enemy(position);
       enemies.push(enemy);
@@ -30,8 +30,8 @@ function draw() {
       laser.check_edges();
       laser.check_collision();
 
-      const lindex = lasers.indexOf(laser);
-      if (laser.has_exploded) lasers.splice(lindex, 1);
+      const index = lasers.indexOf(laser);
+      if (laser.exploded) lasers.splice(index, 1);
    });
 
    missiles.forEach(missile => {
@@ -42,7 +42,7 @@ function draw() {
       missile.check_collision();
 
       const index = missiles.indexOf(missile);
-      if (missile.has_exploded) missiles.splice(index, 1);
+      if (missile.exploded) missiles.splice(index, 1);
    })
 
    player.render();

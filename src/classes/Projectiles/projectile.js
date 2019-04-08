@@ -1,9 +1,12 @@
 class Projectile {
    constructor(origin) {
-      this.has_exploded = false;
       this.position = createVector(origin.position.x, origin.position.y);
-      this.velocity;
       this.type = origin.type;
+      this.exploded = false;
+      this.width; 
+      this.height;
+      this.velocity;
+      this.target_acquired;
    }
 
    check_edges() {
@@ -24,7 +27,7 @@ class Projectile {
                   this.position.x >= (enemy.position.x - enemy.width) - this.width &&
                   this.position.y <= (enemy.position.y + enemy.height) + this.height &&
                   this.position.y >= (enemy.position.y - enemy.height) - this.height
-               ) this.has_exploded = true;
+               ) this.exploded = true;
             })
             break;
 
@@ -34,7 +37,7 @@ class Projectile {
                this.position.x >= (player.position.x - player.width) - this.width &&
                this.position.y <= (player.position.y + player.height) + this.height &&
                this.position.y >= (player.position.y - player.height) - this.height
-            ) this.has_exploded = true;
+            ) this.exploded = true;
             break;
       }
    }

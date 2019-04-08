@@ -1,20 +1,26 @@
 /*  
-* Spawn laser:
-   ? Shoot laser immediately, then
-   ? after the set <origin>.fire_rate
+* Spawn projectile:
+   ? origin.firing.mode determines which Projectile to spawn
+
+   ? Each case would then:
+      ? shoot a projectile immediately, then
+      ? after the set <origin>.firing.rate
 */
-function spawn_lasers(origin) {
-   lasers.push(new Laser(origin));
 
-	return window.setInterval(() => {
-		lasers.push(new Laser(origin));
-	}, origin.fire_rate);
-}
+function spawn_projectile(origin) {
+   switch (origin.firing.mode) {
+      case "LASER":
+         lasers.push(new Laser(origin));
 
-function spawn_missile(origin) {
-   missiles.push(new Missile(origin));
+         return window.setInterval(() => {
+            lasers.push(new Laser(origin));
+         }, origin.firing.rate);
 
-	return window.setInterval(() => {
-		missiles.push(new Missile(origin));
-	}, origin.fire_rate);
+      case "MISSILE":
+         missiles.push(new Missile(origin));
+
+         return window.setInterval(() => {
+            missiles.push(new Missile(origin));
+         }, origin.firing.rate);
+   }
 }

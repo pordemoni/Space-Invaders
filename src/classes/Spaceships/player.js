@@ -4,9 +4,13 @@ class Player {
       this.width = 14;
       this.height = 14;
       this.type = "PLAYER";
-      this.firing;
+      this.firing = {
+         mode: "LASER",
+         fire: function() {},
+         rate: 250,
+      }
       this.fire_rate = 250;
-      this.drag_multiplier = 0.9;
+      this.drag_multiplier = 0.7;
       this.turn_speed = 8;
       this.boost_directions = {
          left: {
@@ -42,10 +46,10 @@ class Player {
    * Firing
    */
    fire() {
-      this.firing = spawn_lasers(this);
+      this.firing.fire = spawn_projectile(this);
    }
    cease_fire() {
-      window.clearInterval(this.firing);
+      window.clearInterval(this.firing.fire);
    }
 
    /* 
@@ -118,7 +122,7 @@ class Player {
    }
 
    constrain_edges() {
-      this.position.x = constrain(this.position.x, this.width / 2, width - this.width / 2);
-      this.position.y = constrain(this.position.y, this.height / 2, height - this.height / 2);
+      this.position.x = constrain(this.position.x, this.width, width - this.width);
+      this.position.y = constrain(this.position.y, this.height, height - this.height);
    }
 }
