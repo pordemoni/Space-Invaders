@@ -5,12 +5,13 @@ class Player {
       this.height = 14;
       this.type = "PLAYER";
       this.firing = {
+         frame_marker: 0,
          mode: {
+            current: "LASER",
             modes: ["LASER", "MISSILE"],
-            current: "LASER"
          },
          rate: 4,
-         state: false
+         state: false,
       }
       this.fire_rate = 250;
       this.drag_multiplier = 0.7;
@@ -47,10 +48,22 @@ class Player {
 
    /*  
    * Firing
+      ? Checks if the player is firing (toggled on spacebar key press/release)
+      ? Marks the current frameCount (only if it hasn't already been marked yet)
+      ? If the above statements are true, immediately spawn a projectile
+
+      ? Then, starting from the marked frameCount (current frameCount - marked frameCount), 
+      ? spawn a projectile everytime the frameCount is a multiple of 60 (fps) divided by the fire rate
    */
    fire() {
       if (this.firing.state) {
-         if (frameCount % (60 / this.firing.rate) == 0) spawn_projectile(this);
+         if (!this.firing.frame_marker) {
+            this.firing.frame_marker = frameCount;
+            spawn_projectile(this);
+         }
+         if ((frameCount - this.firing.frame_marker) % (60 / this.firing.rate) == 0) spawn_projectile(this);
+      } else {
+         this.firing.frame_marker = 0;
       }
    }
 
