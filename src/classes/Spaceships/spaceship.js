@@ -1,9 +1,6 @@
 class Spaceship {
    constructor(position) {
       this.position = position;
-      this.width;
-      this.height;
-      this.type;
       this.firing = {
          marker: 0,
          mode: {
@@ -12,7 +9,11 @@ class Spaceship {
          },
          rate: 0,
          state: false,
-      }
+      };
+      this.width;
+      this.height;
+      this.exploded = false;
+      this.type;
    }
    /*  
    * Firing
@@ -24,7 +25,7 @@ class Spaceship {
       ? spawn a projectile everytime the frameCount is a multiple of 60 (fps) divided by the fire rate
    */
    fire() {
-      if (this.firing.state) {
+      if (this.firing.state && !this.exploded) {
          if (!this.firing.marker) {
             this.firing.marker = frameCount;
             spawn_projectile(this);

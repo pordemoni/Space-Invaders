@@ -4,6 +4,7 @@ class Enemy extends Spaceship{
       this.width = 10;
       this.height = 10;
       this.position = position;
+      this.exploded = false;
       this.firing = {
          delay: random(0, 2000),
          marker: 0,

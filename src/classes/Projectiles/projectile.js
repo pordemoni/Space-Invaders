@@ -27,7 +27,10 @@ class Projectile {
                   this.position.x >= (enemy.position.x - enemy.width) - this.width &&
                   this.position.y <= (enemy.position.y + enemy.height) + this.height &&
                   this.position.y >= (enemy.position.y - enemy.height) - this.height
-               ) this.exploded = true;
+               ) {
+                  this.exploded = true;
+                  enemy.exploded = true;
+               }
             })
             break;
 

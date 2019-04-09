@@ -13,7 +13,7 @@ class Player extends Spaceship {
          rate: 0.25,
          state: false,
       };
-      this.drag_multiplier = 0.7;
+      this.drag_multiplier = 0.6;
       this.turn_speed = 8;
       this.boost_directions = {
          left: {

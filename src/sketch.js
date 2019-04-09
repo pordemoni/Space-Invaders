@@ -11,7 +11,7 @@ function setup() {
    noStroke();
 
    player = new Player(createVector(width / 2, height - 60));
-   for (let i = 0; i < 4; i++) {
+   for (let i = 0; i < 16; i++) {
       const position = createVector(random(width), 50);
       const enemy = new Enemy(position);
       enemies.push(enemy);
@@ -39,6 +39,9 @@ function draw() {
       enemy.render();
       enemy.update();
       enemy.fire();
+      
+      const index = enemies.indexOf(enemy);
+      if (enemy.exploded) enemies.splice(index, 1);
    })
 }
 
