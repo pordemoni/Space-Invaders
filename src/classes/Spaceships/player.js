@@ -5,12 +5,12 @@ class Player {
       this.height = 14;
       this.type = "PLAYER";
       this.firing = {
-         fire: function() {},
          mode: {
             modes: ["LASER", "MISSILE"],
             current: "LASER"
          },
-         rate: 250,
+         rate: 4,
+         state: false
       }
       this.fire_rate = 250;
       this.drag_multiplier = 0.7;
@@ -49,11 +49,15 @@ class Player {
    * Firing
    */
    fire() {
-      this.firing.fire = spawn_projectile(this);
+      if (this.firing.state) {
+         if (frameCount % (60 / this.firing.rate) == 0) spawn_projectile(this);
+      }
    }
-   cease_fire() {
-      window.clearInterval(this.firing.fire);
+
+   set_firing_state(state) {
+      this.firing.state = state;
    }
+
    cycle_firing_mode() {
       const modes = this.firing.mode.modes;
       const current = this.firing.mode.current;

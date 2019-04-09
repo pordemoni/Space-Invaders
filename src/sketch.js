@@ -1,7 +1,5 @@
 let player;
 let enemies = [];
-let lasers = [];
-let missiles = [];
 let projectiles = [];
 
 let enemy;
@@ -17,7 +15,7 @@ function setup() {
       const position = createVector(random(width), 50);
       const enemy = new Enemy(position);
       enemies.push(enemy);
-      enemy.fire();
+      // enemy.fire();
    }
 }
 
@@ -36,6 +34,7 @@ function draw() {
 
    player.render();
    player.update();
+   player.fire();
 
    enemies.forEach(enemy => {
       enemy.render();

@@ -17,7 +17,7 @@ function keyPressed(event) {
          player.boost_backward();
          break;
       case SPACE:       
-         player.fire();
+         player.set_firing_state(true);
          break;
       case LEFT_SHIFT:
          player.cycle_firing_mode();
@@ -33,16 +33,14 @@ function keyReleased(event) {
 		case RIGHT_ARROW:
 			player.apply_drag_right();
 			break;
-
 		case UP_ARROW:
          player.apply_drag_forward();
 			break;
 		case DOWN_ARROW:
          player.apply_drag_backward();
          break;
-         
-      case 32: 
-         player.cease_fire();
+      case SPACE: 
+         player.set_firing_state(false);
          break;
 	}
 }

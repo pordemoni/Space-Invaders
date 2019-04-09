@@ -11,16 +11,10 @@ function spawn_projectile(origin) {
    switch (origin.firing.mode.current) {
       case "LASER":
          projectiles.push(new Laser(origin));
-
-         return window.setInterval(() => {
-            projectiles.push(new Laser(origin));
-         }, origin.firing.rate);
+         break;
 
       case "MISSILE":
          projectiles.push(new Missile(origin));
-
-         return window.setInterval(() => {
-            projectiles.push(new Missile(origin));
-         }, origin.firing.rate);
+         break;
    }
 }
