@@ -1,19 +1,18 @@
-class Player {
+class Player extends Spaceship {
    constructor(position) {
-      this.position = position;
+      super(position);
       this.width = 14;
       this.height = 14;
       this.type = "PLAYER";
       this.firing = {
-         frame_marker: 0,
+         marker: 0,
          mode: {
             current: "LASER",
             modes: ["LASER", "MISSILE"],
          },
-         rate: 4,
+         rate: 0.25,
          state: false,
-      }
-      this.fire_rate = 250;
+      };
       this.drag_multiplier = 0.7;
       this.turn_speed = 8;
       this.boost_directions = {
@@ -48,25 +47,14 @@ class Player {
 
    /*  
    * Firing
-      ? Checks if the player is firing (toggled on spacebar key press/release)
-      ? Marks the current frameCount (only if it hasn't already been marked yet)
-      ? If the above statements are true, immediately spawn a projectile
+      - fire() method inherited from Spaceship
 
-      ? Then, starting from the marked frameCount (current frameCount - marked frameCount), 
-      ? spawn a projectile everytime the frameCount is a multiple of 60 (fps) divided by the fire rate
+      > set_firing_state()
+         - toggled on "space" key press/release
+      
+      > cycle_firing_mode() 
+         - cycled on "shift" key press
    */
-   fire() {
-      if (this.firing.state) {
-         if (!this.firing.frame_marker) {
-            this.firing.frame_marker = frameCount;
-            spawn_projectile(this);
-         }
-         if ((frameCount - this.firing.frame_marker) % (60 / this.firing.rate) == 0) spawn_projectile(this);
-      } else {
-         this.firing.frame_marker = 0;
-      }
-   }
-
    set_firing_state(state) {
       this.firing.state = state;
    }

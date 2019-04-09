@@ -1,15 +1,17 @@
-class Enemy {
+class Enemy extends Spaceship{
    constructor(position) {
+      super(position);
       this.width = 10;
       this.height = 10;
       this.position = position;
       this.firing = {
          delay: random(0, 2000),
-         fire: function() {},
+         marker: 0,
          mode: {
             current: "MISSILE",
          },
-         rate: 3000,
+         rate: 3,
+         state: true,
       };
       this.type = "ENEMY";
    }
@@ -25,7 +27,7 @@ class Enemy {
 
    fire() {
       setTimeout(() => {
-         this.firing.fire = spawn_projectile(this);
+         super.fire();
       }, this.firing.delay);
    }
 }
