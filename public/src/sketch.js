@@ -17,6 +17,7 @@ function setup() {
 }
 
 function draw() {
+   console.log(projectiles.length);
    background(29, 44, 66);
    projectiles.forEach(projectile => {
       projectile.render();

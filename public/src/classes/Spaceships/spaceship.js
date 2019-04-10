@@ -19,22 +19,26 @@ class Spaceship {
    /*  
    * Firing
       ? Checks if the spaceship is firing (Player: toggled on spacebar key press/release)
-      ? Marks the current frameCount (only if it hasn't already been marked yet)
-      ? Immediately spawn a projectile (If the above statements are true)
-
-      ? Then, starting from the marked frameCount (current frameCount - marked frameCount), 
-      ? spawn a projectile everytime the frameCount is a multiple of 60 (fps) divided by the fire rate
+         > if so: 
+            ? Check if the firing marker has been set
+               > if so:
+                     ? starting from the marked frameCount (current frameCount - firing marker), 
+                     ? spawn a projectile everytime the frameCount is a multiple of 60 (fps) multiplied by the fire rate
+               > if not: set the marker & immediately spawn a projectile
+                  
+         > if not: 
+            ? reset the firing marker
+            ? exit fire()
    */
    fire() {
-      if (this.firing.state && !this.exploded) {
-         if (!this.firing.marker) {
+      if (this.firing.state) {
+         if (this.firing.marker) {
+            if ((frameCount - this.firing.marker) % (60 * this.firing.rate) == 0) spawn_projectile(this);
+         } else {
             this.firing.marker = frameCount;
             spawn_projectile(this);
          }
-         if ((frameCount - this.firing.marker) % (60 * this.firing.rate) == 0) spawn_projectile(this);
-      } else {
-         this.firing.marker = 0;
-      }
+      } else this.firing.marker = 0;
    }
    
    constrain_edges() {

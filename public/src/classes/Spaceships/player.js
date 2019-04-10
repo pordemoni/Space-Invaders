@@ -6,7 +6,7 @@ class Player extends Spaceship {
       this.velocity = createVector(6, 6);
       this.autopilot = {
          velocity: createVector(1, 1),
-         state: true,
+         state: false,
       };
       this.drag_multiplier = 0.8;
       this.firing = {
@@ -50,7 +50,6 @@ class Player extends Spaceship {
          this.constrain_edges();
          this.fire();
       }
-      console.log(this.autopilot.state);
    }
 
    toggle_autopilot() {
