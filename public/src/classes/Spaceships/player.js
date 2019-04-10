@@ -1,9 +1,10 @@
 class Player extends Spaceship {
    constructor(position) {
       super(position);
+      this.velocity = createVector(6, 6);
       this.width = 14;
       this.height = 14;
-      this.type = "PLAYER";
+      this.drag_multiplier = 0.8;
       this.firing = {
          marker: 0,
          mode: {
@@ -13,26 +14,25 @@ class Player extends Spaceship {
          rate: 0.25,
          state: false,
       };
-      this.drag_multiplier = 0.6;
-      this.turn_speed = 8;
       this.boost_directions = {
          left: {
-            speed: {current: 0, max: this.turn_speed},
+            speed: {current: 0, max: this.velocity.x},
             drag: {current: 1, no_drag: 1, max: this.drag_multiplier}
          },
          right: {
-            speed: {current: 0, max: this.turn_speed},
+            speed: {current: 0, max: this.velocity.x},
             drag: {current: 1, no_drag: 1, max: this.drag_multiplier}
          },
          forward: {
-            speed: {current: 0, max: 6},
+            speed: {current: 0, max: this.velocity.y},
             drag: {current: 1, no_drag: 1, max: this.drag_multiplier}
          },
          backward: {
-            speed: {current: 0, max: 6},
+            speed: {current: 0, max: this.velocity.y},
             drag: {current: 1, no_drag: 1, max: this.drag_multiplier}
          },
       };
+      this.type = "PLAYER";
    }
 
    render() {
@@ -140,8 +140,4 @@ class Player extends Spaceship {
       this.boost_directions.backward.drag.current = this.boost_directions.backward.drag.max;
    }
 
-   constrain_edges() {
-      this.position.x = constrain(this.position.x, this.width, width - this.width);
-      this.position.y = constrain(this.position.y, this.height, height - this.height);
-   }
 }

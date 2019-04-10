@@ -1,6 +1,10 @@
 class Spaceship {
    constructor(position) {
+      this.width;
+      this.height;
       this.position = position;
+      this.velocity;
+      this.exploded = false;
       this.firing = {
          marker: 0,
          mode: {
@@ -10,9 +14,6 @@ class Spaceship {
          rate: 0,
          state: false,
       };
-      this.width;
-      this.height;
-      this.exploded = false;
       this.type;
    }
    /*  
@@ -34,5 +35,10 @@ class Spaceship {
       } else {
          this.firing.marker = 0;
       }
+   }
+   
+   constrain_edges() {
+      this.position.x = constrain(this.position.x, this.width, width - this.width);
+      this.position.y = constrain(this.position.y, this.height, height - this.height);
    }
 }

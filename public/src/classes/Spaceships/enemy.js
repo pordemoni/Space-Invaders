@@ -3,7 +3,7 @@ class Enemy extends Spaceship{
       super(position);
       this.width = 10;
       this.height = 10;
-      this.position = position;
+      this.velocity = createVector(random([-1, 1]), 0);
       this.exploded = false;
       this.firing = {
          delay: random(0, 2000),
@@ -18,14 +18,22 @@ class Enemy extends Spaceship{
    }
 
    render() {
-      fill(255, 0, 0);
+      // fill(255, 0, 0);
+      fill("rgba(255, 0, 0, 0.75)");
       rect(this.position.x, this.position.y, this.width, this.height);
    }
 
    update() {
-
+      this.position.add(this.velocity);
+      this.constrain_edges();
    }
 
+   constrain_edges() {
+      super.constrain_edges();
+      if (this.position.x <= this.width ||this.position.x >= width - this.width)
+         this.velocity.x = -this.velocity.x;
+   }
+   
    fire() {
       setTimeout(() => {
          super.fire();
