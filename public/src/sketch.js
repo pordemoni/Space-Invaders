@@ -10,11 +10,9 @@ function setup() {
    ellipseMode(RADIUS);
    noStroke();
 
-   player = new Player(createVector(width / 2, height - 60));
+   player = new Player(width / 2, height - 60);
    for (let i = 0; i < 12; i++) {
-      const position = createVector(random(width), 50);
-      const enemy = new Enemy(position);
-      enemies.push(enemy);
+      enemies.push(new Enemy(random(width), 50));
    }
 }
 
@@ -33,12 +31,11 @@ function draw() {
 
    player.render();
    player.update();
-   player.fire();
 
    enemies.forEach(enemy => {
       enemy.render();
-      enemy.update();
-      enemy.fire();
+      // enemy.update();
+      // enemy.fire();
       
       const index = enemies.indexOf(enemy);
       if (enemy.exploded) enemies.splice(index, 1);

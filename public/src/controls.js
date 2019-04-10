@@ -1,5 +1,6 @@
 const SPACE = 32
-      LEFT_SHIFT = 16;
+      LEFT_SHIFT = 16
+      Z = 90;
 
 function keyPressed(event) {
    // console.log(keyCode);
@@ -21,6 +22,9 @@ function keyPressed(event) {
          break;
       case LEFT_SHIFT:
          player.cycle_firing_mode();
+         break;
+      case Z:
+         player.toggle_autopilot();
          break;
 	}
 }

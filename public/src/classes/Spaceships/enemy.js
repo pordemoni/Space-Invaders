@@ -1,6 +1,6 @@
 class Enemy extends Spaceship{
-   constructor(position) {
-      super(position);
+   constructor(x, y) {
+      super(x, y);
       this.width = 10;
       this.height = 10;
       this.velocity = createVector(random([-1, 1]), 0);

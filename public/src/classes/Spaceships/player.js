@@ -1,9 +1,13 @@
 class Player extends Spaceship {
-   constructor(position) {
-      super(position);
-      this.velocity = createVector(6, 6);
+   constructor(x, y) {
+      super(x, y);
       this.width = 14;
       this.height = 14;
+      this.velocity = createVector(6, 6);
+      this.autopilot = {
+         velocity: createVector(1, 1),
+         state: true,
+      };
       this.drag_multiplier = 0.8;
       this.firing = {
          marker: 0,
@@ -41,10 +45,18 @@ class Player extends Spaceship {
    }
 
    update() {
-      this.boosting();
-      this.constrain_edges();
+      if (!this.autopilot.state) {
+         this.boosting();
+         this.constrain_edges();
+         this.fire();
+      }
+      console.log(this.autopilot.state);
    }
 
+   toggle_autopilot() {
+      this.autopilot.state = this.autopilot.state ? false : true;
+   }
+   
    /*  
    * Firing
       - fire() method inherited from Spaceship

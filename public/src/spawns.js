@@ -6,7 +6,6 @@
       ? shoot a projectile immediately, then
       ? after the set <origin>.firing.rate
 */
-
 function spawn_projectile(origin) {
    switch (origin.firing.mode.current) {
       case "LASER":
@@ -16,5 +15,11 @@ function spawn_projectile(origin) {
       case "MISSILE":
          projectiles.push(new Missile(origin));
          break;
+   }
+}
+
+function spawn_line(position, count) {
+   for (let i = 0; i < count; i++) {
+      enemies.push(new Enemy)
    }
 }

@@ -1,8 +1,8 @@
 class Spaceship {
-   constructor(position) {
+   constructor(x, y) {
       this.width;
       this.height;
-      this.position = position;
+      this.position = createVector(x, y);
       this.velocity;
       this.exploded = false;
       this.firing = {
