@@ -45,4 +45,26 @@ class Spaceship {
       this.position.x = constrain(this.position.x, this.width, width - this.width);
       this.position.y = constrain(this.position.y, this.height, height - this.height);
    }
+
+   check_collision() {
+      switch (this.type) {
+         case "ENEMY":
+         {
+            if (this.position.x <= (player.position.x + player.width) + this.width && 
+            this.position.x >= (player.position.x - player.width) - this.width &&
+            this.position.y <= (player.position.y + player.height) + this.height &&
+            this.position.y >= (player.position.y - player.height) - this.height &&
+            !player.shield.state 
+            ) {
+               this.exploded = true;
+               if (player.HP.current > 0) {
+                  sfx.player.hit.play();
+                  player.HP.current--;
+                  player.shield.activate();
+               }
+            }
+         }
+           
+      }
+   }
 }

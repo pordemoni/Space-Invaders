@@ -13,7 +13,8 @@ let sfx = {
    },
 }
 
-let enemy_count = 2;
+let fr;
+let enemy_count = 3;
 
 function preload() {
    sfx.player.laser = loadSound("../assets/audio/laser01.wav");
@@ -28,6 +29,8 @@ function setup() {
    ellipseMode(RADIUS);
    noStroke();
    
+   console.log(frameRate());
+   
    player = new Player(width / 2, height - 60);
    for (let i = 0; i < enemy_count; i++) {
       enemies.push(new Enemy(random(width), random(50, 200)));
@@ -36,7 +39,6 @@ function setup() {
 
 function draw() {
    background(29, 44, 66);
-
    // console.log(player.shield.state, player.HP.current);
    // console.log(player.HP.current);
    // console.log(projectiles.length);
@@ -59,11 +61,12 @@ function draw() {
 
    enemies.forEach(enemy => {
       enemy.render();
-      enemy.update();
       enemy.fire();
+      enemy.check_collision();
       
       const index = enemies.indexOf(enemy);
       if (enemy.exploded) enemies.splice(index, 1);
+      enemy.update();
    })
 }
 

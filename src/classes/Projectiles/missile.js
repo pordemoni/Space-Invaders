@@ -3,7 +3,7 @@ class Missile extends Projectile {
       super(origin);
       this.width = 4;
       this.height = 4;
-      this.velocity = createVector(0, 2);
+      this.velocity = createVector(0, 3);
       this.target_acquired = false;
       this.type = "MISSILE";
    }

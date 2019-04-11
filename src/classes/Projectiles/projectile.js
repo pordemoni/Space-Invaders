@@ -45,7 +45,7 @@ class Projectile {
                   sfx.player.hit.play();
                   player.HP.current--;
                   player.shield.activate();
-                  console.log(player.HP.current);
+                  // console.log(player.HP.current);
                }
             }
             break;
