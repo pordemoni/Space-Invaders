@@ -1,5 +1,6 @@
-class Projectile {
+class Projectile extends Space_Object{
    constructor(origin) {
+      super();
       this.position = createVector(origin.position.x, origin.position.y);
       this.origin_type = origin.type;
       this.exploded = false;
@@ -7,7 +8,7 @@ class Projectile {
       this.height;
       this.velocity;
       this.target_acquired;
-      this.type;
+      this.type = "PROJECTILE";
    }
 
    check_edges() {
@@ -17,39 +18,6 @@ class Projectile {
          this.position.y <= -this.height * 2 ||
          this.position.y >= this.height * 2 + height
       ) this.exploded = true;
-   }
-
-   check_collision() {
-      switch (this.origin_type) {
-         case "PLAYER":
-            enemies.forEach(enemy => {
-               if (this.position.x <= (enemy.position.x + enemy.width) + this.width && 
-                  this.position.x >= (enemy.position.x - enemy.width) - this.width &&
-                  this.position.y <= (enemy.position.y + enemy.height) + this.height &&
-                  this.position.y >= (enemy.position.y - enemy.height) - this.height
-               ) {
-                  this.exploded = true;
-                  enemy.exploded = true;
-               }
-            })
-            break;
-
-         case "ENEMY":
-            if (this.position.x <= (player.position.x + player.width) + this.width && 
-               this.position.x >= (player.position.x - player.width) - this.width &&
-               this.position.y <= (player.position.y + player.height) + this.height &&
-               this.position.y >= (player.position.y - player.height) - this.height
-            ) {
-               this.exploded = true;
-               if (!player.shield.state && player.HP.current > 0) {
-                  sfx.player.hit.play();
-                  player.HP.current--;
-                  player.shield.activate();
-                  // console.log(player.HP.current);
-               }
-            }
-            break;
-      }
    }
 
    set_direction() {

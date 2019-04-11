@@ -53,7 +53,6 @@ function draw() {
       if (projectile.exploded) projectiles.splice(index, 1);
 
       projectile.update();
-
    });
 
    player.render();
@@ -66,6 +65,7 @@ function draw() {
       
       const index = enemies.indexOf(enemy);
       if (enemy.exploded) enemies.splice(index, 1);
+      
       enemy.update();
    })
 }
