@@ -1,12 +1,13 @@
 class Projectile {
    constructor(origin) {
       this.position = createVector(origin.position.x, origin.position.y);
-      this.type = origin.type;
+      this.origin_type = origin.type;
       this.exploded = false;
       this.width; 
       this.height;
       this.velocity;
       this.target_acquired;
+      this.type;
    }
 
    check_edges() {
@@ -19,7 +20,7 @@ class Projectile {
    }
 
    check_collision() {
-      switch (this.type) {
+      switch (this.origin_type) {
          case "PLAYER":
             enemies.forEach(enemy => {
                if (

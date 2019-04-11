@@ -5,7 +5,7 @@ class Missile extends Projectile {
       this.height = 4;
       this.velocity = createVector(0, 2);
       this.target_acquired = false;
-      this.mode = "MISSILE";
+      this.type = "MISSILE";
    }
 
    render() {
@@ -14,7 +14,7 @@ class Missile extends Projectile {
    }
 
    update() {
-      switch (this.type) {
+      switch (this.origin_type) {
          case "PLAYER":
             this.position.sub(this.velocity);
             break;

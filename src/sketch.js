@@ -2,14 +2,18 @@ let player;
 let enemies = [];
 let projectiles = [];
 
-let enemy;
+let laser01;
+function preload() {
+laser01 = loadSound("../assets/audio/laser01.wav");
+}
+
 function setup() {
    createCanvas(document.body.clientWidth, window.innerHeight);
    angleMode(DEGREES);
    rectMode(RADIUS);
    ellipseMode(RADIUS);
    noStroke();
-
+   
    player = new Player(width / 2, height - 60);
    for (let i = 0; i < 4; i++) {
       enemies.push(new Enemy(random(width), 50));
@@ -17,8 +21,13 @@ function setup() {
 }
 
 function draw() {
-   console.log(projectiles.length);
    background(29, 44, 66);
+
+   // console.log(projectiles.length);
+
+   let laser_pan = map(player.position.x, 0, width, -1, 1);
+   laser01.pan(laser_pan);
+   
    projectiles.forEach(projectile => {
       projectile.render();
       projectile.set_direction();
@@ -35,8 +44,8 @@ function draw() {
 
    enemies.forEach(enemy => {
       enemy.render();
-      // enemy.update();
-      // enemy.fire();
+      enemy.update();
+      enemy.fire();
       
       const index = enemies.indexOf(enemy);
       if (enemy.exploded) enemies.splice(index, 1);
