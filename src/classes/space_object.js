@@ -9,55 +9,36 @@ class Space_Object {
    }
 
    check_collision() {
-      switch (this.type) {
-         case "ENEMY": 
-            if (this.position.x <= (player.position.x + player.width) + this.width && 
+
+      // ? Handles collision to Player
+
+      if (this.type == "ENEMY" || this.origin_type == "ENEMY") {
+         if (!player.shield.state &&
+            this.position.x <= (player.position.x + player.width) + this.width &&
             this.position.x >= (player.position.x - player.width) - this.width &&
             this.position.y <= (player.position.y + player.height) + this.height &&
-            this.position.y >= (player.position.y - player.height) - this.height &&
-            !player.shield.state 
-            ) {
-               this.exploded = true;
-               if (player.HP.current > 0) {
-                  sfx.player.hit.play();
-                  player.HP.current--;
-                  player.shield.activate();
-               }
+            this.position.y >= (player.position.y - player.height) - this.height) {
+            this.exploded = true;
+            if (player.HP.current > 0) {
+               sfx.player.hit.play();
+               player.HP.current--;
+               player.shield.activate();
             }
-            break;
-         
-
-         case "PROJECTILE": 
-            switch (this.origin_type) {
-               case "PLAYER": 
-                  enemies.forEach(enemy => {
-                     if (this.position.x <= (enemy.position.x + enemy.width) + this.width && 
-                        this.position.x >= (enemy.position.x - enemy.width) - this.width &&
-                        this.position.y <= (enemy.position.y + enemy.height) + this.height &&
-                        this.position.y >= (enemy.position.y - enemy.height) - this.height
-                     ) {
-                        this.exploded = true;
-                        enemy.exploded = true;
-                     }
-                  })
-                  break;
-               
-
-               case "ENEMY": 
-                  if (this.position.x <= (player.position.x + player.width) + this.width && 
-                     this.position.x >= (player.position.x - player.width) - this.width &&
-                     this.position.y <= (player.position.y + player.height) + this.height &&
-                     this.position.y >= (player.position.y - player.height) - this.height
-                  ) {
-                     this.exploded = true;
-                     if (!player.shield.state && player.HP.current > 0) {
-                        sfx.player.hit.play();
-                        player.HP.current--;
-                        player.shield.activate();
-                        // console.log(player.HP.current);
-                     }
-                  }
          }
+      }
+      
+      // ? Handles Player's Projectile collision
+
+      else if (this.type == "PROJECTILE" && this.origin_type == "PLAYER") {
+         enemies.forEach(enemy => {
+            if (this.position.x <= (enemy.position.x + enemy.width) + this.width &&
+               this.position.x >= (enemy.position.x - enemy.width) - this.width &&
+               this.position.y <= (enemy.position.y + enemy.height) + this.height &&
+               this.position.y >= (enemy.position.y - enemy.height) - this.height) {
+               this.exploded = true;
+               enemy.exploded = true;
+            }
+         })
       }
    }
 }
