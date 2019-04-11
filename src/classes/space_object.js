@@ -38,6 +38,7 @@ class Space_Object {
                      ) {
                         this.exploded = true;
                         enemy.exploded = true;
+                        sfx.enemy.hit.play();
                      }
                   })
                   break;

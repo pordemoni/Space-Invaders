@@ -14,3 +14,8 @@ function play_sfx(origin) {
       }
    }
 }
+
+function loadedBGM() {
+   // bgm.play();
+   bgm.loop();
+}
