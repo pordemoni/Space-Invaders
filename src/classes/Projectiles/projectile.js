@@ -42,8 +42,10 @@ class Projectile {
             ) {
                this.exploded = true;
                if (!player.shield.state) {
+                  sfx.player.hit.play();
                   player.HP.current--;
                   player.shield.activate();
+                  console.log(player.HP.current);
                }
             }
             break;

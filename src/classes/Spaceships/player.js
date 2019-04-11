@@ -9,25 +9,26 @@ class Player extends Spaceship {
          velocity: createVector(1, 1),
          state: false,
       };
-      this.boost_directions = {
+      // * Keep this.easing on top of this.dir
+      this.easing = 0.8;
+      this.dir = {
          left: {
             speed: {current: 0, max: this.velocity.x},
-            drag: {current: 1, no_drag: 1, max: this.drag_multiplier}
+            easing: {current: 1, default: 1, max: this.easing}
          },
          right: {
             speed: {current: 0, max: this.velocity.x},
-            drag: {current: 1, no_drag: 1, max: this.drag_multiplier}
+            easing: {current: 1, default: 1, max: this.easing}
          },
          forward: {
             speed: {current: 0, max: this.velocity.y},
-            drag: {current: 1, no_drag: 1, max: this.drag_multiplier}
+            easing: {current: 1, default: 1, max: this.easing}
          },
          backward: {
             speed: {current: 0, max: this.velocity.y},
-            drag: {current: 1, no_drag: 1, max: this.drag_multiplier}
+            easing: {current: 1, default: 1, max: this.easing}
          },
       };
-      this.drag_multiplier = 0.8;
       this.firing = {
          marker: 0,
          mode: {
@@ -42,29 +43,32 @@ class Player extends Spaceship {
          default: 3,
          max: 5,
       };
+      this.opacity = 1;
       this.shield = {
          activate: () => {
             this.shield.state = true;
+            this.opacity = 0.25;
+            
             setTimeout(() => {
                this.shield.state = false;
+               this.opacity = 1;
             }, 1000 * this.shield.duration);
          },
          duration: 3,
          state: false,
       };
    }
-
+      
    render() {
-      fill(50, 520, 255);
+      fill(`rgba(50, 255, 255, ${this.opacity})`);
       rect(this.position.x, this.position.y, this.width, this.height);
+      
    }
 
    update() {
-      if (!this.autopilot.state) {
-         this.boosting();
-         this.constrain_edges();
-         this.fire();
-      }
+      this.boosting();
+      this.constrain_edges();
+      this.fire();
    }
 
    toggle_autopilot() {
@@ -104,18 +108,18 @@ class Player extends Spaceship {
    */
    boosting() {
       // ? Left & right turns
-      this.position.x -= this.boost_directions.left.speed.current;
-      this.position.x += this.boost_directions.right.speed.current;
+      this.position.x -= this.dir.left.speed.current;
+      this.position.x += this.dir.right.speed.current;
       
       // ? Forward & backward thrusts
-      this.position.y -= this.boost_directions.forward.speed.current;
-      this.position.y += this.boost_directions.backward.speed.current;
+      this.position.y -= this.dir.forward.speed.current;
+      this.position.y += this.dir.backward.speed.current;
 
       // ? Applies "drag"
-      this.boost_directions.left.speed.current *= this.boost_directions.left.drag.current;
-      this.boost_directions.right.speed.current *= this.boost_directions.right.drag.current;
-      this.boost_directions.forward.speed.current *= this.boost_directions.forward.drag.current;
-      this.boost_directions.backward.speed.current *= this.boost_directions.backward.drag.current;
+      this.dir.left.speed.current *= this.dir.left.easing.current;
+      this.dir.right.speed.current *= this.dir.right.easing.current;
+      this.dir.forward.speed.current *= this.dir.forward.easing.current;
+      this.dir.backward.speed.current *= this.dir.backward.easing.current;
    }
    
    /*  
@@ -125,25 +129,25 @@ class Player extends Spaceship {
       ? temporarily remove the drag, which are then reapplied upon KEY RELEASE
    */
    boost_left() {
-      this.boost_directions.left.speed.current = this.boost_directions.left.speed.max;
+      this.dir.left.speed.current = this.dir.left.speed.max;
       
       // ? Removes "drag"
-      this.boost_directions.left.drag.current = this.boost_directions.left.drag.no_drag;
+      this.dir.left.easing.current = this.dir.left.easing.default;
    }
 
    boost_right() {
-      this.boost_directions.right.speed.current = this.boost_directions.right.speed.max;
-      this.boost_directions.right.drag.current = this.boost_directions.right.drag.no_drag;
+      this.dir.right.speed.current = this.dir.right.speed.max;
+      this.dir.right.easing.current = this.dir.right.easing.default;
    }
 
    boost_forward() {
-      this.boost_directions.forward.speed.current = this.boost_directions.forward.speed.max;
-      this.boost_directions.forward.drag.current = this.boost_directions.forward.drag.no_drag;
+      this.dir.forward.speed.current = this.dir.forward.speed.max;
+      this.dir.forward.easing.current = this.dir.forward.easing.default;
    }
 
    boost_backward() {
-      this.boost_directions.backward.speed.current = this.boost_directions.backward.speed.max;
-      this.boost_directions.backward.drag.current = this.boost_directions.backward.drag.no_drag;
+      this.dir.backward.speed.current = this.dir.backward.speed.max;
+      this.dir.backward.easing.current = this.dir.backward.easing.default;
    }
 
    /*  
@@ -151,19 +155,19 @@ class Player extends Spaceship {
       ? set the current drag to the max drag
    */
    apply_drag_left() {
-      this.boost_directions.left.drag.current = this.boost_directions.left.drag.max;
+      this.dir.left.easing.current = this.dir.left.easing.max;
    }
 
    apply_drag_right() {
-      this.boost_directions.right.drag.current = this.boost_directions.right.drag.max;
+      this.dir.right.easing.current = this.dir.right.easing.max;
    }
 
    apply_drag_forward() {
-      this.boost_directions.forward.drag.current = this.boost_directions.forward.drag.max;
+      this.dir.forward.easing.current = this.dir.forward.easing.max;
    }
 
    apply_drag_backward() {
-      this.boost_directions.backward.drag.current = this.boost_directions.backward.drag.max;
+      this.dir.backward.easing.current = this.dir.backward.easing.max;
    }
 
 }

@@ -1,11 +1,11 @@
 let player;
 let enemies = [];
 let projectiles = [];
-
 let sfx = {
    player: {
       laser: null,
       missile: null,
+      hit: null
    },
    enemy: {
       laser: null,
@@ -13,8 +13,11 @@ let sfx = {
    },
 }
 
+let enemy_count = 2;
+
 function preload() {
    sfx.player.laser = loadSound("../assets/audio/laser01.wav");
+   sfx.player.hit = loadSound("../assets/audio/hit01.wav");
    sfx.enemy.missile = loadSound("../assets/audio/laser03_enemy.wav");
 }
 
@@ -26,15 +29,15 @@ function setup() {
    noStroke();
    
    player = new Player(width / 2, height - 60);
-   for (let i = 0; i < 1; i++) {
-      enemies.push(new Enemy(width / 2, 50));
+   for (let i = 0; i < enemy_count; i++) {
+      enemies.push(new Enemy(random(width), random(50, 200)));
    }
 }
 
 function draw() {
    background(29, 44, 66);
 
-   console.log(player.shield.state);
+   // console.log(player.shield.state, player.HP.current);
    // console.log(player.HP.current);
    // console.log(projectiles.length);
    
@@ -56,7 +59,7 @@ function draw() {
 
    enemies.forEach(enemy => {
       enemy.render();
-      // enemy.update();
+      enemy.update();
       enemy.fire();
       
       const index = enemies.indexOf(enemy);
