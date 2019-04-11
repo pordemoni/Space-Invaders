@@ -35,10 +35,8 @@ class Enemy extends Spaceship{
    }
    
    fire() {
-      if (!this.exploded) {
-         setTimeout(() => {
-            super.fire();
-         }, this.firing.delay);
-      }
+      setTimeout(() => {
+         super.fire();
+      }, this.firing.delay);
    }
 }

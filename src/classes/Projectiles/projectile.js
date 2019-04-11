@@ -41,7 +41,7 @@ class Projectile {
                this.position.y >= (player.position.y - player.height) - this.height
             ) {
                this.exploded = true;
-               if (!player.shield.state) {
+               if (!player.shield.state && player.HP.current > 0) {
                   sfx.player.hit.play();
                   player.HP.current--;
                   player.shield.activate();

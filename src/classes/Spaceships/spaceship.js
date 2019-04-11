@@ -31,7 +31,7 @@ class Spaceship {
             ? exit fire()
    */
    fire() {
-      if (this.firing.state) {
+      if (this.firing.state && !this.exploded) {
          if (this.firing.marker) {
             if ((frameCount - this.firing.marker) % (60 * this.firing.rate) == 0) spawn_projectile(this);
          } else {
