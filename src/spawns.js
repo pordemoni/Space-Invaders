@@ -14,6 +14,7 @@ function spawn_projectile(origin) {
          break;
 
       case "MISSILE":
+         play_sfx(origin);
          projectiles.push(new Missile(origin));
          break;
    }

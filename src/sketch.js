@@ -2,9 +2,20 @@ let player;
 let enemies = [];
 let projectiles = [];
 
-let laser01;
+let sfx = {
+   player: {
+      laser: null,
+      missile: null,
+   },
+   enemy: {
+      laser: null,
+      missile: null,
+   },
+}
+
 function preload() {
-laser01 = loadSound("../assets/audio/laser01.wav");
+   sfx.player.laser = loadSound("../assets/audio/laser01.wav");
+   sfx.enemy.missile = loadSound("../assets/audio/laser03_enemy.wav");
 }
 
 function setup() {
@@ -24,9 +35,6 @@ function draw() {
    background(29, 44, 66);
 
    // console.log(projectiles.length);
-
-   let laser_pan = map(player.position.x, 0, width, -1, 1);
-   laser01.pan(laser_pan);
    
    projectiles.forEach(projectile => {
       projectile.render();
