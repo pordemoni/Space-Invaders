@@ -11,7 +11,7 @@ function setup() {
    noStroke();
 
    player = new Player(width / 2, height - 60);
-   for (let i = 0; i < 12; i++) {
+   for (let i = 0; i < 4; i++) {
       enemies.push(new Enemy(random(width), 50));
    }
 }
