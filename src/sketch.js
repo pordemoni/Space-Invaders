@@ -26,7 +26,7 @@ function setup() {
    noStroke();
    
    player = new Player(width / 2, height - 60);
-   for (let i = 0; i < 2; i++) {
+   for (let i = 0; i < 1; i++) {
       enemies.push(new Enemy(width / 2, 50));
    }
 }
@@ -34,6 +34,8 @@ function setup() {
 function draw() {
    background(29, 44, 66);
 
+   console.log(player.shield.state);
+   // console.log(player.HP.current);
    // console.log(projectiles.length);
    
    projectiles.forEach(projectile => {

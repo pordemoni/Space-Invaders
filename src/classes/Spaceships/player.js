@@ -44,7 +44,10 @@ class Player extends Spaceship {
       };
       this.shield = {
          activate: () => {
-            console.log("Shield activated!");
+            this.shield.state = true;
+            setTimeout(() => {
+               this.shield.state = false;
+            }, 1000 * this.shield.duration);
          },
          duration: 3,
          state: false,
