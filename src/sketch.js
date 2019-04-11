@@ -26,8 +26,8 @@ function setup() {
    noStroke();
    
    player = new Player(width / 2, height - 60);
-   for (let i = 0; i < 4; i++) {
-      enemies.push(new Enemy(random(width), 50));
+   for (let i = 0; i < 2; i++) {
+      enemies.push(new Enemy(width / 2, 50));
    }
 }
 
@@ -39,12 +39,14 @@ function draw() {
    projectiles.forEach(projectile => {
       projectile.render();
       projectile.set_direction();
-      projectile.update();
       projectile.check_edges();
       projectile.check_collision();
 
       const index = projectiles.indexOf(projectile);
       if (projectile.exploded) projectiles.splice(index, 1);
+
+      projectile.update();
+
    });
 
    player.render();
@@ -52,7 +54,7 @@ function draw() {
 
    enemies.forEach(enemy => {
       enemy.render();
-      enemy.update();
+      // enemy.update();
       enemy.fire();
       
       const index = enemies.indexOf(enemy);

@@ -23,8 +23,7 @@ class Projectile {
       switch (this.origin_type) {
          case "PLAYER":
             enemies.forEach(enemy => {
-               if (
-                  this.position.x <= (enemy.position.x + enemy.width) + this.width && 
+               if (this.position.x <= (enemy.position.x + enemy.width) + this.width && 
                   this.position.x >= (enemy.position.x - enemy.width) - this.width &&
                   this.position.y <= (enemy.position.y + enemy.height) + this.height &&
                   this.position.y >= (enemy.position.y - enemy.height) - this.height
@@ -36,12 +35,17 @@ class Projectile {
             break;
 
          case "ENEMY":
-            if (
-               this.position.x <= (player.position.x + player.width) + this.width && 
+            if (this.position.x <= (player.position.x + player.width) + this.width && 
                this.position.x >= (player.position.x - player.width) - this.width &&
                this.position.y <= (player.position.y + player.height) + this.height &&
                this.position.y >= (player.position.y - player.height) - this.height
-            ) this.exploded = true;
+            ) {
+               this.exploded = true;
+               if (!player.shield.state) {
+                  player.HP.current--;
+                  player.shield.activate();
+               }
+            }
             break;
       }
    }

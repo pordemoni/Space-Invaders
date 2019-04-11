@@ -1,21 +1,12 @@
 class Player extends Spaceship {
    constructor(x, y) {
       super(x, y);
+      this.type = "PLAYER";
+      this.velocity = createVector(6, 6);
       this.width = 14;
       this.height = 14;
-      this.velocity = createVector(6, 6);
       this.autopilot = {
          velocity: createVector(1, 1),
-         state: false,
-      };
-      this.drag_multiplier = 0.8;
-      this.firing = {
-         marker: 0,
-         mode: {
-            current: "LASER",
-            modes: ["LASER", "MISSILE"],
-         },
-         rate: 0.25,
          state: false,
       };
       this.boost_directions = {
@@ -36,7 +27,28 @@ class Player extends Spaceship {
             drag: {current: 1, no_drag: 1, max: this.drag_multiplier}
          },
       };
-      this.type = "PLAYER";
+      this.drag_multiplier = 0.8;
+      this.firing = {
+         marker: 0,
+         mode: {
+            current: "LASER",
+            modes: ["LASER", "MISSILE"],
+         },
+         rate: 0.25,
+         state: false,
+      };
+      this.HP = {
+         current: 3,
+         default: 3,
+         max: 5,
+      };
+      this.shield = {
+         activate: () => {
+            console.log("Shield activated!");
+         },
+         duration: 3,
+         state: false,
+      };
    }
 
    render() {
