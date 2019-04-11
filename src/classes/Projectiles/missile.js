@@ -27,7 +27,7 @@ class Missile extends Projectile {
    
    set_direction() {
       if (!this.target_acquired) {
-         switch (this.type) {
+         switch (this.origin_type) {
             case "ENEMY":
                let difference = p5.Vector.sub(player.position, this.position);
                let direction = difference.normalize();
