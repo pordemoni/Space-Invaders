@@ -12,13 +12,13 @@ class Space_Object {
       switch (this.type) {
 
          // ?  Player to Enemy collision
-         
-         case "ENEMY": 
-            if (this.position.x <= (player.position.x + player.width) + this.width && 
-            this.position.x >= (player.position.x - player.width) - this.width &&
-            this.position.y <= (player.position.y + player.height) + this.height &&
-            this.position.y >= (player.position.y - player.height) - this.height &&
-            !player.shield.state 
+
+         case "ENEMY":
+            if (this.position.x <= (player.position.x + player.width) + this.width &&
+               this.position.x >= (player.position.x - player.width) - this.width &&
+               this.position.y <= (player.position.y + player.height) + this.height &&
+               this.position.y >= (player.position.y - player.height) - this.height &&
+               !player.shield.state
             ) {
                this.exploded = true;
                if (player.HP.current > 0) {
@@ -29,16 +29,16 @@ class Space_Object {
                }
             }
             break;
-         
 
-         case "PROJECTILE": 
+
+         case "PROJECTILE":
             switch (this.origin_type) {
 
                // ? Player's Projectile to Enemy collision
-               
-               case "PLAYER": 
+
+               case "PLAYER":
                   enemies.forEach(enemy => {
-                     if (this.position.x <= (enemy.position.x + enemy.width) + this.width && 
+                     if (this.position.x <= (enemy.position.x + enemy.width) + this.width &&
                         this.position.x >= (enemy.position.x - enemy.width) - this.width &&
                         this.position.y <= (enemy.position.y + enemy.height) + this.height &&
                         this.position.y >= (enemy.position.y - enemy.height) - this.height
@@ -49,11 +49,11 @@ class Space_Object {
                      }
                   })
                   break;
-               
-               // ? Enemy's Projectile to Player collision
 
-               case "ENEMY": 
-                  if (this.position.x <= (player.position.x + player.width) + this.width && 
+                  // ? Enemy's Projectile to Player collision
+
+               case "ENEMY":
+                  if (this.position.x <= (player.position.x + player.width) + this.width &&
                      this.position.x >= (player.position.x - player.width) - this.width &&
                      this.position.y <= (player.position.y + player.height) + this.height &&
                      this.position.y >= (player.position.y - player.height) - this.height
@@ -66,7 +66,7 @@ class Space_Object {
                         // console.log(player.HP.current);
                      }
                   }
-         }
+            }
       }
    }
 }

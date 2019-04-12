@@ -1,21 +1,23 @@
 /*  
-* Spawn projectile:
+* spawn_projectile(origin):
+   @param {object} origin - used to check the type of projectile to spawn
+   ? the origin is also used by the Projectiles, which determine where they will spawn
    ? origin.firing.mode determines which Projectile to spawn
 
    ? Each case would then:
-      ? shoot a projectile immediately, then
-      ? after the set <origin>.firing.rate
+      ? spawn a projectile, then
+      ? play the according SFX
 */
 function spawn_projectile(origin) {
    switch (origin.firing.mode.current) {
       case "LASER":
-         play_sfx(origin, "FIRE");
          projectiles.push(new Laser(origin));
+         play_sfx(origin, "FIRE");
          break;
 
       case "MISSILE":
-         play_sfx(origin, "FIRE");
          projectiles.push(new Missile(origin));
+         play_sfx(origin, "FIRE");
          break;
    }
 }
