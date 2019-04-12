@@ -37,6 +37,7 @@ class Space_Object {
                // ? Player's Projectile to Enemy collision
 
                case "PLAYER":
+               trenches.forEach(trench => {
                   trench.ships.forEach(enemy => {
                      if (this.position.x <= (enemy.position.x + enemy.width) + this.width &&
                         this.position.x >= (enemy.position.x - enemy.width) - this.width &&
@@ -48,6 +49,7 @@ class Space_Object {
                         play_sfx(enemy, "CRASH");
                      }
                   })
+               });
                   break;
 
                   // ? Enemy's Projectile to Player collision

@@ -5,7 +5,7 @@ let projectiles = [];
 let trenches = [];
 let bgm = {
    track: null,
-   state: false,
+   state: true,
 };
 let sfx = {
    player: {
@@ -20,9 +20,10 @@ let sfx = {
    },
 };
 
-let trench_count = 1;
+let trench_count = 3;
 
 function preload() {
+   bgm.track = loadSound("../assets/audio/BGM/rolemusic_may.mp3");
    sfx.player.laser = loadSound("../assets/audio/SFX/player_laser.wav");
    sfx.enemy.missile = loadSound("../assets/audio/SFX/enemy_missile.wav");
    sfx.player.crash = loadSound("../assets/audio/SFX/player_hit.wav");
@@ -35,10 +36,12 @@ function setup() {
    rectMode(RADIUS);
    ellipseMode(RADIUS);
    noStroke();
-   bgm.track = loadSound("../assets/audio/BGM/rolemusic_may.mp3", loadedBGM);
    
-   player = new Player(createVector(width / 2, height - 60));
+   if (bgm.state) {
+      bgm.track.loop();
+   }
 
+   player = new Player(createVector(width / 2, height - 60));
    for (let i = 0; i < trench_count; i++) {
       const position = createVector(width / 2, random(50, 200));
       const velocity = createVector(random([-1, 1]), 0);
@@ -50,9 +53,6 @@ function setup() {
 
 function draw() {
    background(29, 44, 66);
-   // console.log(player.shield.state, player.HP.current);
-   // console.log(player.HP.current);
-   // console.log(projectiles.length);
    
    projectiles.forEach(projectile => {
       projectile.render();

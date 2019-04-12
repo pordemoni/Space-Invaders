@@ -25,6 +25,7 @@ class Enemy extends Spaceship{
 
    update() {
       this.position.add(this.velocity);
+      // ? edge detection is now handled by the Trench
       // this.constrain_edges();
    }
 
