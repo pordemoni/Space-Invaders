@@ -4,7 +4,7 @@ class Laser extends Projectile {
       this.velocity = createVector(0, 10);
       this.height = 6;
       this.width = 2;
-      
+
       this.mode = "LASER";
    }
 
@@ -23,5 +23,13 @@ class Laser extends Projectile {
             this.position.add(this.velocity);
             break;
       }
+   }
+   
+   check_collision() {
+      super.check_collision();
+   }
+
+   check_edges() {
+      super.check_edges();
    }
 }

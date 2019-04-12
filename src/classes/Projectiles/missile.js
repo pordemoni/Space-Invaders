@@ -5,7 +5,7 @@ class Missile extends Projectile {
       this.width = 4;
       this.height = 4;
       this.target_acquired = false;
-      
+
       this.mode = "MISSILE";
    }
 
@@ -24,6 +24,14 @@ class Missile extends Projectile {
             this.position.add(this.velocity);
             break;
       }
+   }
+   
+   check_collision() {
+      super.check_collision();
+   }
+
+   check_edges() {
+      super.check_edges();
    }
    
    set_direction() {

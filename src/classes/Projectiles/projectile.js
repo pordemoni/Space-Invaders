@@ -12,6 +12,10 @@ class Projectile extends Space_Object {
       this.target_acquired;
    }
 
+   check_collision() {
+      super.check_collision();
+   }
+   
    check_edges() {
       if (this.position.x <= -this.width * 2 ||
          this.position.x >= this.width * 2 + width ||
