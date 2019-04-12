@@ -37,7 +37,7 @@ class Space_Object {
                // ? Player's Projectile to Enemy collision
 
                case "PLAYER":
-                  enemies.forEach(enemy => {
+                  trench.ships.forEach(enemy => {
                      if (this.position.x <= (enemy.position.x + enemy.width) + this.width &&
                         this.position.x >= (enemy.position.x - enemy.width) - this.width &&
                         this.position.y <= (enemy.position.y + enemy.height) + this.height &&

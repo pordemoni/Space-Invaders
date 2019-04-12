@@ -16,7 +16,9 @@ let sfx = {
       missile: null,
       crash: null,
    },
-}
+};
+
+let trench;
 
 let fr;
 let enemy_count = 3;
@@ -37,11 +39,11 @@ function setup() {
    bgm.track = loadSound("../assets/audio/BGM/rolemusic_may.mp3", loadedBGM);
    
    player = new Player(createVector(width / 2, height - 60));
-   for (let i = 0; i < enemy_count; i++) {
-      const position = createVector(random(width), random(50, 200));
-      const velocity = createVector(random([-1, 1]), 0);
-      enemies.push(new Enemy(position, velocity));
-   }
+
+   const position = createVector(width / 2, random(50, 200));
+   const velocity = createVector(random([-1, 1]), 0);
+   trench = new Trench(position, velocity);
+   trench.spawn();
 }
 
 function draw() {
@@ -65,16 +67,7 @@ function draw() {
    player.render();
    player.update();
 
-   enemies.forEach(enemy => {
-      enemy.render();
-      enemy.fire();
-      enemy.check_collision();
-      
-      const index = enemies.indexOf(enemy);
-      if (enemy.exploded) enemies.splice(index, 1);
-      
-      enemy.update();
-   })
+   trench.deploy();
 }
 
 function windowResized() {
