@@ -1,6 +1,8 @@
+p5.disableFriendlyErrors = true;
+
 let player;
-let enemies = [];
 let projectiles = [];
+let trenches = [];
 let bgm = {
    track: null,
    state: false,
@@ -18,10 +20,7 @@ let sfx = {
    },
 };
 
-let trench;
-
-let fr;
-let enemy_count = 3;
+let trench_count = 1;
 
 function preload() {
    sfx.player.laser = loadSound("../assets/audio/SFX/player_laser.wav");
@@ -40,10 +39,13 @@ function setup() {
    
    player = new Player(createVector(width / 2, height - 60));
 
-   const position = createVector(width / 2, random(50, 200));
-   const velocity = createVector(random([-1, 1]), 0);
-   trench = new Trench(position, velocity);
-   trench.spawn();
+   for (let i = 0; i < trench_count; i++) {
+      const position = createVector(width / 2, random(50, 200));
+      const velocity = createVector(random([-1, 1]), 0);
+      trench = new Trench(position, velocity);
+      trenches.push(trench);
+      trench.spawn();
+   }
 }
 
 function draw() {
@@ -67,7 +69,14 @@ function draw() {
    player.render();
    player.update();
 
-   trench.deploy();
+   trenches.forEach(trench => {
+      trench.check_edges();
+      trench.deploy();
+
+      const index = trenches.indexOf(trench);
+      if (!trench.ships.length) trenches.splice(index, 1);
+   });
+
 }
 
 function windowResized() {

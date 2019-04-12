@@ -25,7 +25,7 @@ class Enemy extends Spaceship{
 
    update() {
       this.position.add(this.velocity);
-      this.constrain_edges();
+      // this.constrain_edges();
    }
 
    constrain_edges() {
