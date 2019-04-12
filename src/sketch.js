@@ -36,9 +36,11 @@ function setup() {
    noStroke();
    bgm.track = loadSound("../assets/audio/BGM/rolemusic_may.mp3", loadedBGM);
    
-   player = new Player(width / 2, height - 60);
+   player = new Player(createVector(width / 2, height - 60));
    for (let i = 0; i < enemy_count; i++) {
-      enemies.push(new Enemy(random(width), random(50, 200)));
+      const position = createVector(random(width), random(50, 200));
+      const velocity = createVector(random([-1, 1]), 0);
+      enemies.push(new Enemy(position, velocity));
    }
 }
 

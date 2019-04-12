@@ -1,9 +1,9 @@
 class Enemy extends Spaceship{
-   constructor(x, y) {
-      super(x, y);
+   constructor(position, velocity) {
+      super(position);
       this.width = 10;
       this.height = 10;
-      this.velocity = createVector(random([-1, 1]), 0);
+      this.velocity = velocity;
       this.exploded = false;
       this.firing = {
          delay: random(0, 2000),

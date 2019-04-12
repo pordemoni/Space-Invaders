@@ -1,9 +1,9 @@
 class Spaceship extends Space_Object {
-   constructor(x, y) {
-      super(x, y);
+   constructor(position) {
+      super(position);
       this.width;
       this.height;
-      this.position = createVector(x, y);
+      this.position = position;
       this.velocity;
       this.exploded = false;
       this.firing = {

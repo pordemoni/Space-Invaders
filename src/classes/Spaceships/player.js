@@ -1,6 +1,6 @@
 class Player extends Spaceship {
-   constructor(x, y) {
-      super(x, y);
+   constructor(position) {
+      super(position);
       this.type = "PLAYER";
       this.velocity = createVector(6, 6);
       this.width = 14;

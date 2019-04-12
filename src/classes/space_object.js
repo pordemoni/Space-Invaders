@@ -1,6 +1,6 @@
 class Space_Object {
-   constructor(x, y) {
-      this.position = createVector(x, y);
+   constructor(position) {
+      this.position = position;
       this.velocity;
       this.width;
       this.height;
