@@ -1,11 +1,13 @@
 class Spaceship extends Space_Object {
    constructor(position) {
       super(position);
-      this.width;
-      this.height;
+      this.type;
       this.position = position;
       this.velocity;
+      this.width;
+      this.height;
       this.exploded = false;
+      
       this.firing = {
          marker: 0,
          mode: {
@@ -15,7 +17,6 @@ class Spaceship extends Space_Object {
          rate: 0,
          state: false,
       };
-      this.type;
    }
    /*  
    * Firing
@@ -42,7 +43,7 @@ class Spaceship extends Space_Object {
       } else this.firing.marker = 0;
    }
    
-   constrain_edges() {
+   check_edges() {
       this.position.x = constrain(this.position.x, this.width, width - this.width);
       this.position.y = constrain(this.position.y, this.height, height - this.height);
    }

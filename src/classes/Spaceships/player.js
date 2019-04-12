@@ -5,6 +5,16 @@ class Player extends Spaceship {
       this.velocity = createVector(6, 6);
       this.width = 14;
       this.height = 14;
+      this.firing = {
+         marker: 0,
+         mode: {
+            current: "LASER",
+            modes: ["LASER"],
+         },
+         rate: 0.25,
+         state: false,
+      };
+
       this.autopilot = {
          velocity: createVector(1, 1),
          state: false,
@@ -28,15 +38,6 @@ class Player extends Spaceship {
             speed: {current: 0, max: this.velocity.y},
             easing: {current: 1, default: 1, max: this.easing}
          },
-      };
-      this.firing = {
-         marker: 0,
-         mode: {
-            current: "LASER",
-            modes: ["LASER", "MISSILE"],
-         },
-         rate: 0.25,
-         state: false,
       };
       this.HP = {
          current: 3,
@@ -67,7 +68,7 @@ class Player extends Spaceship {
 
    update() {
       this.boosting();
-      this.constrain_edges();
+      this.check_edges();
       this.fire();
    }
 

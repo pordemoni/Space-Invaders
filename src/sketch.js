@@ -1,3 +1,9 @@
+/*
+* credits:
+   > Rolemusic: http://freemusicarchive.org/music/Rolemusic/
+   > BGM: http://freemusicarchive.org/music/Rolemusic/~/May_1871
+*/
+
 p5.disableFriendlyErrors = true;
 
 let player;

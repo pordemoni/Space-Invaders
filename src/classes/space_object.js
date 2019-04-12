@@ -1,10 +1,10 @@
 class Space_Object {
    constructor(position) {
+      this.type;
       this.position = position;
       this.velocity;
       this.width;
       this.height;
-      this.type;
       this.exploded = false;
    }
 
