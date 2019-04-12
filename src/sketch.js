@@ -1,17 +1,20 @@
 let player;
 let enemies = [];
 let projectiles = [];
-let bgm;
+let bgm = {
+   track: null,
+   state: false,
+};
 let sfx = {
    player: {
       laser: null,
       missile: null,
-      hit: null
+      crash: null
    },
    enemy: {
       laser: null,
       missile: null,
-      hit: null,
+      crash: null,
    },
 }
 
@@ -21,8 +24,8 @@ let enemy_count = 3;
 function preload() {
    sfx.player.laser = loadSound("../assets/audio/SFX/player_laser.wav");
    sfx.enemy.missile = loadSound("../assets/audio/SFX/enemy_missile.wav");
-   sfx.player.hit = loadSound("../assets/audio/SFX/player_hit.wav");
-   sfx.enemy.hit = loadSound("../assets/audio/SFX/enemy_hit.wav");
+   sfx.player.crash = loadSound("../assets/audio/SFX/player_hit.wav");
+   sfx.enemy.crash = loadSound("../assets/audio/SFX/enemy_hit.wav");
 }
 
 function setup() {
@@ -31,7 +34,7 @@ function setup() {
    rectMode(RADIUS);
    ellipseMode(RADIUS);
    noStroke();
-   bgm = loadSound("../assets/audio/BGM/rolemusic_may.mp3", loadedBGM);
+   bgm.track = loadSound("../assets/audio/BGM/rolemusic_may.mp3", loadedBGM);
    
    player = new Player(width / 2, height - 60);
    for (let i = 0; i < enemy_count; i++) {

@@ -9,12 +9,12 @@
 function spawn_projectile(origin) {
    switch (origin.firing.mode.current) {
       case "LASER":
-         play_sfx(origin);
+         play_sfx(origin, "FIRE");
          projectiles.push(new Laser(origin));
          break;
 
       case "MISSILE":
-         play_sfx(origin);
+         play_sfx(origin, "FIRE");
          projectiles.push(new Missile(origin));
          break;
    }

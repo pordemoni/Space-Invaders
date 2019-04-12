@@ -10,6 +10,9 @@ class Space_Object {
 
    check_collision() {
       switch (this.type) {
+
+         // ?  Player to Enemy collision
+         
          case "ENEMY": 
             if (this.position.x <= (player.position.x + player.width) + this.width && 
             this.position.x >= (player.position.x - player.width) - this.width &&
@@ -19,7 +22,8 @@ class Space_Object {
             ) {
                this.exploded = true;
                if (player.HP.current > 0) {
-                  sfx.player.hit.play();
+                  play_sfx(this, "CRASH");
+                  play_sfx(player, "CRASH");
                   player.HP.current--;
                   player.shield.activate();
                }
@@ -29,6 +33,9 @@ class Space_Object {
 
          case "PROJECTILE": 
             switch (this.origin_type) {
+
+               // ? Player's Projectile to Enemy collision
+               
                case "PLAYER": 
                   enemies.forEach(enemy => {
                      if (this.position.x <= (enemy.position.x + enemy.width) + this.width && 
@@ -38,11 +45,12 @@ class Space_Object {
                      ) {
                         this.exploded = true;
                         enemy.exploded = true;
-                        sfx.enemy.hit.play();
+                        play_sfx(enemy, "CRASH");
                      }
                   })
                   break;
                
+               // ? Enemy's Projectile to Player collision
 
                case "ENEMY": 
                   if (this.position.x <= (player.position.x + player.width) + this.width && 
@@ -52,9 +60,9 @@ class Space_Object {
                   ) {
                      this.exploded = true;
                      if (!player.shield.state && player.HP.current > 0) {
-                        sfx.player.hit.play();
                         player.HP.current--;
                         player.shield.activate();
+                        play_sfx(player, "CRASH");
                         // console.log(player.HP.current);
                      }
                   }

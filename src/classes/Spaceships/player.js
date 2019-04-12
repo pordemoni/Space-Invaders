@@ -9,7 +9,7 @@ class Player extends Spaceship {
          velocity: createVector(1, 1),
          state: false,
       };
-      // * Keep this.easing on top of this.dir
+      // ! Keep this.easing on top of this.dir
       this.easing = 0.8;
       this.dir = {
          left: {
