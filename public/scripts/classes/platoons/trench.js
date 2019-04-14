@@ -5,7 +5,7 @@ class Trench extends Platoon {
       this.total = 4;
       this.ships = [];
       this.spacing = {
-         x: 150,
+         x: 50,
          y: 0
       };
    }
@@ -18,9 +18,16 @@ class Trench extends Platoon {
       }
    }
 
+   deploy() {
+      super.deploy();
+   }
+   
    check_edges() {
-      if (this.ships[0].position.x <= this.ships[0].width ||this.ships[0].position.x >= width - this.ships[0].width ||
-         this.ships[this.ships.length - 1].position.x <= this.ships[this.ships.length - 1].width ||this.ships[this.ships.length - 1].position.x >= width - this.ships[this.ships.length - 1].width)
+      if (this.ships[0].position.x <= this.ships[0].width ||
+         this.ships[0].position.x >= width - this.ships[0].width ||
+         this.ships[this.ships.length - 1].position.x <= this.ships[this.ships.length - 1].width ||
+         this.ships[this.ships.length - 1].position.x >= width - this.ships[this.ships.length - 1].width) {
          this.velocity.x = -this.velocity.x;
+      }
    }
 }

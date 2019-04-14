@@ -28,6 +28,10 @@ class Enemy extends Spaceship{
       // this.check_edges();
    }
 
+   check_collision() {
+      super.chec_collision();
+   }
+   
    check_edges() {
       super.check_edges();
       if (this.position.x <= this.width ||this.position.x >= width - this.width)

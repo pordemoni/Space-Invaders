@@ -16,8 +16,12 @@ class Player extends Spaceship {
       };
 
       this.autopilot = {
-         velocity: createVector(1, 1),
-         state: false,
+         duration: 3,
+         off: () => {
+            this.autopilot.state = false;
+         },
+         state: true,
+         velocity: createVector(0, 1),
       };
       // ! Keep this.easing on top of this.dir
       this.easing = 0.8;
@@ -78,12 +82,24 @@ class Player extends Spaceship {
             this.shield.state = true;
             this.opacity = 0.25;
 
-            setTimeout(() => {
-               this.shield.state = false;
-               this.opacity = 1;
-            }, 1000 * this.shield.duration);
+            switch (this.autopilot.state) {
+               case true: {
+                  setTimeout(() => {
+                     this.shield.state = false;
+                     this.opacity = 1;
+                  }, 1000 * this.shield.alt_duration);
+                  break;
+               }
+               default: {
+                  setTimeout(() => {
+                     this.shield.state = false;
+                     this.opacity = 1;
+                  }, 1000 * this.shield.duration);
+               }
+            }
          },
          duration: 3,
+         alt_duration: 6,
          state: false,
       };
    }
@@ -95,9 +111,20 @@ class Player extends Spaceship {
    }
 
    update() {
-      this.boosting();
-      this.check_edges();
-      this.fire();
+      switch (this.autopilot.state) {
+         case true:
+            if (this.position.y <= (height / 4) * 3) {
+               this.autopilot.off();
+            }
+            this.shield.activate();
+            this.position.sub(this.autopilot.velocity);
+            break;
+
+         default:
+            this.boosting();
+            this.check_edges();
+            this.fire();
+      }
    }
 
    /* 
@@ -176,7 +203,7 @@ class Player extends Spaceship {
    check_edges() {
       super.check_edges();
    }
-   
+
    /*  
    * Firing
       - fire() method inherited from Spaceship

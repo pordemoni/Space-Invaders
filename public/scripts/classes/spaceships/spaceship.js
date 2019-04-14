@@ -22,7 +22,7 @@ class Spaceship extends Space_Object {
    check_collision() {
       super.check_collision();
    }
-   
+
    check_edges() {
       this.position.x = constrain(this.position.x, this.width, width - this.width);
       this.position.y = constrain(this.position.y, this.height, height - this.height);
@@ -45,7 +45,9 @@ class Spaceship extends Space_Object {
    fire() {
       if (this.firing.state && !this.exploded) {
          if (this.firing.marker) {
-            if ((frameCount - this.firing.marker) % (60 * this.firing.rate) == 0) spawn_projectile(this);
+            if ((frameCount - this.firing.marker) % (60 * this.firing.rate) == 0) {
+               spawn_projectile(this);
+            }
          } else {
             this.firing.marker = frameCount;
             spawn_projectile(this);
