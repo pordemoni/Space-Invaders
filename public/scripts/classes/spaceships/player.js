@@ -14,15 +14,6 @@ class Player extends Spaceship {
          rate: 0.25,
          state: false,
       };
-
-      this.autopilot = {
-         duration: 3,
-         off: () => {
-            this.autopilot.state = false;
-         },
-         state: false,
-         velocity: createVector(0, 1),
-      };
       // ! Keep this.easing on top of this.dir
       this.easing = 0.8;
       this.dir = {
@@ -84,27 +75,14 @@ class Player extends Spaceship {
          activate: () => {
             this.shield.state = true;
 
-            switch (this.autopilot.state) {
-               case true:
-                  {
-                     setTimeout(() => {
-                        this.shield.deactivate();
-                     }, 1000 * this.shield.alt_duration);
-                     break;
-                  }
-               default:
-                  {
-                     setTimeout(() => {
-                        this.shield.deactivate();
-                     }, 1000 * this.shield.duration);
-                  }
-            }
+            setTimeout(() => {
+               this.shield.deactivate();
+            }, 1000 * this.shield.duration);
          },
          deactivate: () => {
             this.shield.state = false;
          },
          duration: 3,
-         alt_duration: 6,
          state: false,
       };
    }
@@ -116,21 +94,10 @@ class Player extends Spaceship {
    }
 
    update() {
-      switch (this.autopilot.state) {
-         case true:
-            if (this.position.y <= (height / 4) * 3) {
-               this.autopilot.off();
-            }
-            this.shield.activate();
-            this.position.sub(this.autopilot.velocity);
-            break;
-
-         default:
-            this.boosting();
-            this.flicker();
-            this.check_edges();
-            this.fire();
-      }
+      this.flicker();
+      this.boosting();
+      this.check_edges();
+      this.fire();
    }
 
    flicker() {
@@ -139,10 +106,10 @@ class Player extends Spaceship {
          if (this.opacity.value < 0.1 || this.opacity.value > 1) {
             this.opacity.speed = -this.opacity.speed;
          }
-      } 
-      else this.opacity.value = 1;
-      
+      } else this.opacity.value = 1;
    }
+
+
 
    /* 
    * Boosting

@@ -2,7 +2,6 @@ class Spaceship extends Space_Object {
    constructor(position) {
       super(position);
       this.type;
-      this.position = position;
       this.velocity;
       this.width;
       this.height;
@@ -19,13 +18,20 @@ class Spaceship extends Space_Object {
       };
    }
 
+   render() {
+      super.render();
+   }
+   
+   update() {
+      super.update();
+   }
+   
    check_collision() {
       super.check_collision();
    }
 
    check_edges() {
-      this.position.x = constrain(this.position.x, this.width, width - this.width);
-      this.position.y = constrain(this.position.y, this.height, height - this.height);
+      super.check_edges();
    }
 
    /*  

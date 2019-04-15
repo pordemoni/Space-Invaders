@@ -1,0 +1,26 @@
+> Space_Object
+- render()
+- update()
+- check_collision()
+- check_edges()
+
+   > Spaceship
+   - fire()
+
+      > Enemy
+      > Player
+      - flicker()
+      - boosting
+
+   > Projectile
+   - set_direction
+
+      > Missile
+      > Laser
+
+> Platoon
+- spawn()
+- deploy()
+- check_edges()
+   
+   > Trench

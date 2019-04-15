@@ -4,31 +4,6 @@
    > bgm: http://freemusicarchive.org/music/Rolemusic/~/May_1871
 */
 
-p5.disableFriendlyErrors = true;
-
-let FPS;
-let player;
-let projectiles = [];
-let trenches = [];
-let bgm = {
-   track: null,
-   state: true,
-};
-let sfx = {
-   player: {
-      laser: null,
-      missile: null,
-      crash: null
-   },
-   enemy: {
-      laser: null,
-      missile: null,
-      crash: null,
-   },
-};
-
-let trench_count = 1;
-
 // function preload() {
 //    bgm.track = loadSound("../assets/audio/bgm/rolemusic_may.mp3");
 //    sfx.player.laser = loadSound("../assets/audio/sfx/player_laser.wav");
@@ -50,7 +25,6 @@ function setup() {
 
    player = new Player(createVector(width / 2, height + 20));
    for (let i = 0; i < trench_count; i++) {
-      // const position = createVector(width / 2, random(50, 200));
       const position = createVector(random(width), random(50, 200));
       const velocity = createVector(random([-1, 1]), 0);
       trench = new Trench(position, velocity);
@@ -60,8 +34,6 @@ function setup() {
 }
 
 function draw() {
-   // FPS = Math.floor(frameRate());
-   console.log(player.opacity.value);
    background(29, 44, 66);
    
    // * Projectiles
@@ -90,7 +62,7 @@ function draw() {
       trench.deploy();
       
       const index = trenches.indexOf(trench);
-      if (!trench.ships.length) trenches.splice(index, 1);
+      if (!trench.spaceships.length) trenches.splice(index, 1);
    });
 
 }

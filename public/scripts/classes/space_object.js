@@ -8,6 +8,14 @@ class Space_Object {
       this.exploded = false;
    }
 
+   render() {
+      
+   }
+
+   update() {
+      this.position.add(this.velocity);
+   }
+   
    check_collision() {
       switch (this.type) {
 
@@ -62,13 +70,18 @@ class Space_Object {
                   ) {
                      this.exploded = true;
                      if (!player.shield.state && player.HP.current > 0) {
-                        player.HP.current--;
                         player.shield.activate();
+                        player.HP.current--;
                         play_sfx(player, "CRASH");
                         // console.log(player.HP.current);
                      }
                   }
             }
       }
+   }
+
+   check_edges() {
+      this.position.x = constrain(this.position.x, this.width, width - this.width);
+      this.position.y = constrain(this.position.y, this.height, height - this.height);
    }
 }

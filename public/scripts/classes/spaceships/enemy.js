@@ -23,13 +23,14 @@ class Enemy extends Spaceship{
    }
 
    update() {
-      this.position.add(this.velocity);
+      super.update();
+      
       // ? edge detection is now handled by the Trench
       // this.check_edges();
    }
 
    check_collision() {
-      super.chec_collision();
+      super.check_collision();
    }
    
    check_edges() {
