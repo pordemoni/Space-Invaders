@@ -1,0 +1,27 @@
+> Space_Object
+- type
+- position
+- velocity
+- wdith
+- height
+- exploded
+   
+   > Projectile
+   - mode
+   - origin_type
+   - target_acquired
+
+      > Missile
+      > Laser
+      
+   > Spaceship
+   - firing
+
+      > Enemy
+      > Player 
+      - easing
+      - dir
+      - HP
+      - opacity
+      - shield
+

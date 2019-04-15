@@ -15,10 +15,17 @@ let sfx = {
       crash: null,
    },
 };
+
 let player;
 let projectiles = [];
 let trenches = [];
 
 // Settings
 p5.disableFriendlyErrors = true;
-let trench_count = 1;
+
+const settings = {
+   trench: {
+      max: 3,
+      y_spacing: 50,
+   },
+}

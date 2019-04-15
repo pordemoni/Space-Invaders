@@ -1,11 +1,11 @@
 class Laser extends Projectile {
    constructor(origin) {
       super(origin);
+      this.mode = "LASER";
       this.velocity = createVector(0, 10);
       this.height = 6;
       this.width = 2;
 
-      this.mode = "LASER";
    }
 
    render() {

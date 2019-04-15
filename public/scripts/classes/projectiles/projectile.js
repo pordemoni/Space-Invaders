@@ -8,6 +8,7 @@ class Projectile extends Space_Object {
       this.height;
       this.exploded = false;
 
+      this.mode;
       this.origin_type = origin.type;
       this.target_acquired;
    }

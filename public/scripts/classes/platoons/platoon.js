@@ -2,17 +2,17 @@ class Platoon {
    constructor(position) {
       this.position = position;
       this.velocity;
-      this.total;
-      this.spaceships = [];
       this.autopilot = {
          duration: 3,
-         off: () => {
+         deactivate: () => {
             setTimeout(() => {
                this.autopilot.state = false
             }, 1000 * this.autopilot.duration);
          },
-         state: true,
+         state: false,
       };
+      this.total;
+      this.spaceships = [];
    }
 
    spawn() {
@@ -21,15 +21,28 @@ class Platoon {
 
    deploy() {
       this.spaceships.forEach(spaceship => {
-         spaceship.render();
-         spaceship.fire();
-         spaceship.check_collision();
-
-         const index = this.spaceships.indexOf(spaceship);
-         if (spaceship.exploded) this.spaceships.splice(index, 1);
-         
+         spaceship.render()
          spaceship.update();
       });
+
+      switch (this.autopilot.state) {
+         case true:
+            this.position.add(this.velocity);
+            break;
+
+         default:
+            this.check_edges();
+            this.spaceships.forEach(spaceship => {
+               spaceship.fire();
+               spaceship.check_collision();
+
+               const index = this.spaceships.indexOf(spaceship);
+               if (spaceship.exploded) this.spaceships.splice(index, 1);
+
+            });
+
+
+      }
    }
 
    check_edges() {

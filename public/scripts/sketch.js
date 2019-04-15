@@ -24,16 +24,20 @@ function setup() {
    }
 
    player = new Player(createVector(width / 2, height + 20));
-   for (let i = 0; i < trench_count; i++) {
-      const position = createVector(random(width), random(50, 200));
-      const velocity = createVector(random([-1, 1]), 0);
-      trench = new Trench(position, velocity);
+
+   for (let i = 0; i < settings.trench.max; i++) {
+      const starting_side = random(["LEFT", "RIGHT"]);
+      const y = (i * settings.trench.y_spacing) + 50;
+
+      trench = new Trench(starting_side, y);
       trenches.push(trench);
       trench.spawn();
    }
 }
 
 function draw() {
+   // console.log(trenches[0].position.x);
+   // console.log(trenches[0].autopilot.state);
    background(29, 44, 66);
    
    // * Projectiles
@@ -58,7 +62,7 @@ function draw() {
    // * Enemies
    
    trenches.forEach(trench => {
-      trench.check_edges();
+      trench.check_entry();
       trench.deploy();
       
       const index = trenches.indexOf(trench);

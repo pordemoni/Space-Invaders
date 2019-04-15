@@ -1,12 +1,11 @@
 class Missile extends Projectile {
    constructor(origin) {
       super(origin);
+      this.mode = "MISSILE";
       this.velocity = createVector(0, 3);
       this.width = 4;
       this.height = 4;
       this.target_acquired = false;
-
-      this.mode = "MISSILE";
    }
 
    render() {

@@ -14,6 +14,7 @@ class Player extends Spaceship {
          rate: 0.25,
          state: false,
       };
+
       // ! Keep this.easing on top of this.dir
       this.easing = 0.8;
       this.dir = {
@@ -83,7 +84,6 @@ class Player extends Spaceship {
             this.shield.state = false;
          },
          duration: 3,
-         alt_duration: 6,
          state: false,
       };
    }

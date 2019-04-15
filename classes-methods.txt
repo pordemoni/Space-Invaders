@@ -4,6 +4,12 @@
 - check_collision()
 - check_edges()
 
+   > Projectile
+   - set_direction
+
+      > Missile
+      > Laser
+      
    > Spaceship
    - fire()
 
@@ -12,11 +18,6 @@
       - flicker()
       - boosting
 
-   > Projectile
-   - set_direction
-
-      > Missile
-      > Laser
 
 > Platoon
 - spawn()
