@@ -3,7 +3,7 @@ class Platoon {
       this.position = position;
       this.velocity;
       this.total;
-      this.spaceships = [];
+      this.ships = [];
       this.autopilot = {
          duration: 3,
          off: () => {
@@ -20,17 +20,14 @@ class Platoon {
    }
 
    deploy() {
-      this.spaceships.forEach(spaceship => {
+      this.ships.forEach(ship => {
+         ship.render();
+         ship.fire();
 
-         spaceship.render();
-         // spaceship.fire();
-         spaceship.check_collision();
-         spaceship.check_edges();
+         const index = this.ships.indexOf(ship);
+         if (ship.exploded) this.ships.splice(index, 1);
          
-         const index = this.spaceships.indexOf(spaceship);
-         if (spaceship.exploded) this.spaceships.splice(index, 1);
-         
-         spaceship.update();
+         ship.update();
       });
    }
 

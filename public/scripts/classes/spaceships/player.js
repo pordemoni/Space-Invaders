@@ -83,6 +83,7 @@ class Player extends Spaceship {
             this.shield.state = false;
          },
          duration: 3,
+         alt_duration: 6,
          state: false,
       };
    }
