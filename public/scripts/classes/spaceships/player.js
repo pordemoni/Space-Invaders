@@ -16,8 +16,12 @@ class Player extends Spaceship {
       };
 
       this.autopilot = {
-         velocity: createVector(1, 1),
+         duration: 3,
+         off: () => {
+            this.autopilot.state = false;
+         },
          state: false,
+         velocity: createVector(0, 1),
       };
       // ! Keep this.easing on top of this.dir
       this.easing = 0.8;
@@ -72,32 +76,72 @@ class Player extends Spaceship {
          default: 3,
          max: 5,
       };
-      this.opacity = 1;
+      this.opacity = {
+         value: 1,
+         speed: 0.08,
+      };
       this.shield = {
          activate: () => {
             this.shield.state = true;
-            this.opacity = 0.25;
 
-            setTimeout(() => {
-               this.shield.state = false;
-               this.opacity = 1;
-            }, 1000 * this.shield.duration);
+            switch (this.autopilot.state) {
+               case true:
+                  {
+                     setTimeout(() => {
+                        this.shield.deactivate();
+                     }, 1000 * this.shield.alt_duration);
+                     break;
+                  }
+               default:
+                  {
+                     setTimeout(() => {
+                        this.shield.deactivate();
+                     }, 1000 * this.shield.duration);
+                  }
+            }
+         },
+         deactivate: () => {
+            this.shield.state = false;
          },
          duration: 3,
+         alt_duration: 6,
          state: false,
       };
    }
 
    render() {
-      fill(`rgba(50, 255, 255, ${this.opacity})`);
+      fill(`rgba(50, 255, 255, ${this.opacity.value})`);
       rect(this.position.x, this.position.y, this.width, this.height);
 
    }
 
    update() {
-      this.boosting();
-      this.check_edges();
-      this.fire();
+      switch (this.autopilot.state) {
+         case true:
+            if (this.position.y <= (height / 4) * 3) {
+               this.autopilot.off();
+            }
+            this.shield.activate();
+            this.position.sub(this.autopilot.velocity);
+            break;
+
+         default:
+            this.boosting();
+            this.flicker();
+            this.check_edges();
+            this.fire();
+      }
+   }
+
+   flicker() {
+      if (this.shield.state) {
+         this.opacity.value -= this.opacity.speed;
+         if (this.opacity.value < 0.1 || this.opacity.value > 1) {
+            this.opacity.speed = -this.opacity.speed;
+         }
+      } 
+      else this.opacity.value = 1;
+      
    }
 
    /* 
@@ -176,7 +220,7 @@ class Player extends Spaceship {
    check_edges() {
       super.check_edges();
    }
-   
+
    /*  
    * Firing
       - fire() method inherited from Spaceship
