@@ -3,8 +3,10 @@ class Player extends Spaceship {
       super(position);
       this.type = "PLAYER";
       this.velocity = createVector(6, 6);
-      this.width = 14;
-      this.height = 14;
+      // this.width = 14;
+      // this.height = 14;
+      this.width = 25;
+      this.height = 27;
       this.firing = {
          marker: 0,
          mode: {
@@ -69,8 +71,8 @@ class Player extends Spaceship {
          max: 5,
       };
       this.opacity = {
-         value: 1,
-         speed: 0.08,
+         value: 255,
+         speed: 20,
       };
       this.shield = {
          activate: () => {
@@ -89,9 +91,10 @@ class Player extends Spaceship {
    }
 
    render() {
-      fill(`rgba(50, 255, 255, ${this.opacity.value})`);
-      rect(this.position.x, this.position.y, this.width, this.height);
-
+      push();
+      tint(255, this.opacity.value);
+      image(images.player, this.position.x, this.position.y);
+      pop();
    }
 
    update() {
@@ -104,10 +107,10 @@ class Player extends Spaceship {
    flicker() {
       if (this.shield.state) {
          this.opacity.value -= this.opacity.speed;
-         if (this.opacity.value < 0.1 || this.opacity.value > 1) {
+         if (this.opacity.value < 1 || this.opacity.value > 255) {
             this.opacity.speed = -this.opacity.speed;
          }
-      } else this.opacity.value = 1;
+      } else this.opacity.value = 255;
    }
 
 

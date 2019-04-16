@@ -23,6 +23,7 @@ class Platoon {
       this.spaceships.forEach(spaceship => {
          spaceship.render()
          spaceship.update();
+         spaceship.check_collision();
       });
 
       switch (this.autopilot.state) {
@@ -34,11 +35,9 @@ class Platoon {
             this.check_edges();
             this.spaceships.forEach(spaceship => {
                spaceship.fire();
-               spaceship.check_collision();
 
                const index = this.spaceships.indexOf(spaceship);
                if (spaceship.exploded) this.spaceships.splice(index, 1);
-
             });
 
 

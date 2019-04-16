@@ -3,8 +3,9 @@ class Enemy extends Spaceship{
       super(position);
       this.type = "ENEMY";
       this.velocity = velocity;
-      this.width = 10;
-      this.height = 10;
+      this.image = images.enemy.red;
+      this.width = 25;
+      this.height = 18;
       this.exploded = false;
       this.firing = {
          delay: random(0, 2000),
@@ -18,8 +19,7 @@ class Enemy extends Spaceship{
    }
 
    render() {
-      fill("rgba(255, 0, 0, 0.75)");
-      rect(this.position.x, this.position.y, this.width, this.height);
+      image(this.image, this.position.x, this.position.y);
    }
 
    update() {

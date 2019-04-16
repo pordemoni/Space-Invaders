@@ -15,15 +15,15 @@ function play_sfx(origin, event) {
          switch (origin.type) {
             case "PLAYER":
                {
-                  // sfx.player.laser.pan(stereo_pan);
-                  // sfx.player.laser.play();
+                  sfx.player.laser.pan(stereo_pan);
+                  sfx.player.laser.play();
                   break;
                }
 
             case "ENEMY":
                {
-                  // sfx.enemy.missile.pan(stereo_pan);
-                  // sfx.enemy.missile.play();
+                  sfx.enemy.missile.pan(stereo_pan);
+                  sfx.enemy.missile.play();
                   break;
                }
          }
@@ -33,15 +33,15 @@ function play_sfx(origin, event) {
          switch (origin.type) {
             case "PLAYER":
                {
-                  // sfx.player.crash.pan(stereo_pan);
-                  // sfx.player.crash.play();
+                  sfx.player.crash.pan(stereo_pan);
+                  sfx.player.crash.play();
                   break;
                }
 
             case "ENEMY":
                {
-                  // sfx.enemy.crash.pan(stereo_pan);
-                  // sfx.enemy.crash.play();
+                  sfx.enemy.crash.pan(stereo_pan);
+                  sfx.enemy.crash.play();
                   break;
                }
          }
@@ -51,6 +51,6 @@ function play_sfx(origin, event) {
 
 function loadedBGM() {
    if (bgm.state) {
-      // bgm.track.loop();
+      bgm.track.loop();
    }
 }

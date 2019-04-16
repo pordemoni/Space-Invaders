@@ -4,38 +4,37 @@
    > bgm: http://freemusicarchive.org/music/Rolemusic/~/May_1871
 */
 
-// function preload() {
-//    bgm.track = loadSound("../assets/audio/bgm/rolemusic_may.mp3");
-//    sfx.player.laser = loadSound("../assets/audio/sfx/player_laser.wav");
-//    sfx.enemy.missile = loadSound("../assets/audio/sfx/enemy_missile.wav");
-//    sfx.player.crash = loadSound("../assets/audio/sfx/player_hit.wav");
-//    sfx.enemy.crash = loadSound("../assets/audio/sfx/enemy_hit.wav");
-// }
+function preload() {
+   images.player = loadImage("../assets/images/spaceship-player.png");
+   images.enemy.black = loadImage("../assets/images/spaceship-enemy-black.png");
+   images.enemy.red = loadImage("../assets/images/spaceship-enemy-red.png");
+   bgm.track = loadSound("../assets/audio/bgm/rolemusic_may.mp3");
+   sfx.player.laser = loadSound("../assets/audio/sfx/player_laser.wav");
+   sfx.enemy.missile = loadSound("../assets/audio/sfx/enemy_missile.wav");
+   sfx.player.crash = loadSound("../assets/audio/sfx/player_hit.wav");
+   sfx.enemy.crash = loadSound("../assets/audio/sfx/enemy_hit.wav");
+}
 
 function setup() {
    createCanvas(document.body.clientWidth, window.innerHeight);
    angleMode(DEGREES);
-   rectMode(RADIUS);
    ellipseMode(RADIUS);
+   imageMode(CENTER);
+   rectMode(RADIUS);
    noStroke();
    
    if (bgm.state) {
-      // bgm.track.loop();
+      bgm.track.loop();
    }
 
    player = new Player(createVector(width / 2, height + 20));
-   spawn_platoon("TRENCH", 3);
    
-   
+   spawn_platoon("TRENCH", settings.trench.count);
 }
 
 function draw() {
-   // console.log(trenches[0].position.x);
-   // console.log(trenches[0].autopilot.state);
    background(29, 44, 66);
    
-   fill(0, 255, 0);
-   rect(0, height / 2, 10, 10);
    // * Projectiles
    projectiles.forEach(projectile => {
       projectile.render();
@@ -63,6 +62,11 @@ function draw() {
       const index = trenches.indexOf(trench);
       if (!trench.spaceships.length) trenches.splice(index, 1);
    });
+
+   if (!trenches.length) {
+      settings.trench.count++;
+      spawn_platoon("TRENCH", settings.trench.count);
+   }
 
 }
 

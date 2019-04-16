@@ -3,6 +3,15 @@ let bgm = {
    track: null,
    state: true,
 };
+
+let images = {
+   player: null,
+   enemy: {
+      black: null,
+      red: null,
+   },
+};
+
 let sfx = {
    player: {
       laser: null,
@@ -29,7 +38,7 @@ const settings = {
       y: 40,
    },
    trench: {
-      max: 5,
+      count: 1,
       spacing: {
          x: null,
          y: 40

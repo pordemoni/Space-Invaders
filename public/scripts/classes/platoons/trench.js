@@ -14,7 +14,7 @@ class Trench extends Platoon {
       this.max = 4;
       this.spaceships = [];
       this.spacing = {
-         x: 40,
+         x: 80,
          y: 0
       };
       this.starting_side = starting_side;
