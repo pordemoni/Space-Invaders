@@ -31,6 +31,7 @@ let trenches = [];
 
 // Settings
 p5.disableFriendlyErrors = true;
+let score =  0;
 
 const settings = {
    padding: {

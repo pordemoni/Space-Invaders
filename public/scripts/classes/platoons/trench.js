@@ -21,7 +21,7 @@ class Trench extends Platoon {
 
       switch (this.starting_side) {
          case "LEFT":
-            this.position = createVector(-(((this.max  - 1) * this.spacing.x) + settings.padding.x), y);
+            this.position = createVector(-(((this.max - 1) * this.spacing.x) + settings.padding.x), y);
             this.velocity = createVector(2, 0);
             break;
 
@@ -53,20 +53,22 @@ class Trench extends Platoon {
    }
 
    check_entry() {
-      switch (this.starting_side) {
-         case "LEFT":
-            if (this.spaceships[0].position.x >= 50) {
-               // if (this.autopilot.state) console.log(this.starting_side, frameCount);
-               this.autopilot.deactivate();
-            }
-            break;
+      if (this.autopilot.state) {
+         switch (this.starting_side) {
+            case "LEFT":
+               if (this.spaceships[0].position.x >= 50) {
+                  // if (this.autopilot.state) console.log(this.starting_side, frameCount);
+                  this.autopilot.deactivate();
+               }
+               break;
 
-         case "RIGHT":
-            if (this.spaceships[this.spaceships.length - 1].position.x <= width - 50) {
-               // if (this.autopilot.state) console.log(this.starting_side, frameCount);
-               this.autopilot.deactivate();
-            }
-            break;
+            case "RIGHT":
+               if (this.spaceships[this.spaceships.length - 1].position.x <= width - 50) {
+                  // if (this.autopilot.state) console.log(this.starting_side, frameCount);
+                  this.autopilot.deactivate();
+               }
+               break;
+         }
       }
    }
 }

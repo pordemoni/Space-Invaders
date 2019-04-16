@@ -34,6 +34,7 @@ class Space_Object {
                   play_sfx(player, "CRASH");
                   player.HP.current--;
                   player.shield.activate();
+                  score++;
                }
             }
             break;
@@ -55,6 +56,7 @@ class Space_Object {
                         this.exploded = true;
                         enemy.exploded = true;
                         play_sfx(enemy, "CRASH");
+                        score++;
                      }
                   })
                });

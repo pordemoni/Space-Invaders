@@ -20,11 +20,6 @@ class Platoon {
    }
 
    deploy() {
-      this.spaceships.forEach(spaceship => {
-         spaceship.render()
-         spaceship.update();
-         spaceship.check_collision();
-      });
 
       switch (this.autopilot.state) {
          case true:
@@ -35,13 +30,19 @@ class Platoon {
             this.check_edges();
             this.spaceships.forEach(spaceship => {
                spaceship.fire();
-
-               const index = this.spaceships.indexOf(spaceship);
-               if (spaceship.exploded) this.spaceships.splice(index, 1);
             });
 
 
       }
+      
+      this.spaceships.forEach(spaceship => {
+         spaceship.render()
+         spaceship.update();
+         spaceship.check_collision();
+
+         const index = this.spaceships.indexOf(spaceship);
+         if (spaceship.exploded) this.spaceships.splice(index, 1);
+      });
    }
 
    check_edges() {

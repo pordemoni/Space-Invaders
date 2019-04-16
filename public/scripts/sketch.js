@@ -22,19 +22,25 @@ function setup() {
    imageMode(CENTER);
    rectMode(RADIUS);
    noStroke();
-   
+
    if (bgm.state) {
       bgm.track.loop();
    }
 
    player = new Player(createVector(width / 2, height + 20));
-   
+
    spawn_platoon("TRENCH", settings.trench.count);
 }
 
 function draw() {
    background(29, 44, 66);
-   
+   textSize(32);
+   fill(0, 255, 0);
+   text(player.HP.current, 20, 40);
+
+   fill(255, 255, 0);
+   text(score, 140, 40);
+
    // * Projectiles
    projectiles.forEach(projectile => {
       projectile.render();
@@ -49,16 +55,16 @@ function draw() {
    });
 
    // * Player
-   
+
    player.render();
    player.update();
 
    // * Enemies
-   
+
    trenches.forEach(trench => {
       trench.check_entry();
       trench.deploy();
-      
+
       const index = trenches.indexOf(trench);
       if (!trench.spaceships.length) trenches.splice(index, 1);
    });
