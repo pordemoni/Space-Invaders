@@ -30,6 +30,9 @@ const settings = {
    },
    trench: {
       max: 5,
-      y_spacing: 50,
+      spacing: {
+         x: null,
+         y: 40
+      },
    },
-}
+};

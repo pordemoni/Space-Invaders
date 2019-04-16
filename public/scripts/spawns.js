@@ -22,8 +22,17 @@ function spawn_projectile(origin) {
    }
 }
 
-function spawn_line(position, count) {
-   for (let i = 0; i < count; i++) {
-      enemies.push(new Enemy)
+function spawn_platoon(type, amount) {
+   switch (type) {
+      case "TRENCH":
+         for (let i = 0; i < amount; i++) {
+            const starting_side = random(["LEFT", "RIGHT"]);
+            const y = (i * settings.trench.spacing.y) + settings.padding.y;
+
+            trench = new Trench(starting_side, y);
+            trenches.push(trench);
+            trench.spawn();
+         }
+      
    }
 }

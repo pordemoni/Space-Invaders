@@ -24,15 +24,9 @@ function setup() {
    }
 
    player = new Player(createVector(width / 2, height + 20));
-
-   for (let i = 0; i < settings.trench.max; i++) {
-      const starting_side = random(["LEFT", "RIGHT"]);
-      const y = (i * settings.trench.y_spacing) + 50;
-
-      trench = new Trench(starting_side, y);
-      trenches.push(trench);
-      trench.spawn();
-   }
+   spawn_platoon("TRENCH", 3);
+   
+   
 }
 
 function draw() {
