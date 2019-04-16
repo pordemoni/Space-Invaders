@@ -24,8 +24,12 @@ let trenches = [];
 p5.disableFriendlyErrors = true;
 
 const settings = {
+   padding: {
+      x: 40,
+      y: 40,
+   },
    trench: {
-      max: 3,
+      max: 5,
       y_spacing: 50,
    },
 }

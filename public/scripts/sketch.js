@@ -40,8 +40,9 @@ function draw() {
    // console.log(trenches[0].autopilot.state);
    background(29, 44, 66);
    
+   fill(0, 255, 0);
+   rect(0, height / 2, 10, 10);
    // * Projectiles
-
    projectiles.forEach(projectile => {
       projectile.render();
       projectile.set_direction();

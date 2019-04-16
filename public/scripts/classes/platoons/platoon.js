@@ -11,7 +11,7 @@ class Platoon {
          },
          state: false,
       };
-      this.total;
+      this.max;
       this.spaceships = [];
    }
 
