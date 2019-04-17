@@ -11,8 +11,11 @@ class Platoon {
          },
          state: false,
       };
-      this.max;
-      this.spaceships = [];
+      this.spaceships = {
+         max: null,
+         ships: [],
+         shooters: null,
+      };
    }
 
    spawn() {
@@ -20,7 +23,6 @@ class Platoon {
    }
 
    deploy() {
-
       switch (this.autopilot.state) {
          case true:
             this.position.add(this.velocity);
@@ -28,20 +30,30 @@ class Platoon {
 
          default:
             this.check_edges();
-            this.spaceships.forEach(spaceship => {
-               spaceship.fire();
+            this.spaceships.ships.forEach(ship => {
+               ship.fire();
             });
-
-
       }
-      
-      this.spaceships.forEach(spaceship => {
-         spaceship.render()
-         spaceship.update();
-         spaceship.check_collision();
 
-         const index = this.spaceships.indexOf(spaceship);
-         if (spaceship.exploded) this.spaceships.splice(index, 1);
+      assign_shooters() {
+         let i = 0;
+   
+         while (i < this.spaceships.shooters) {
+            let shooter_index = Math.floor(random(this.spaceships.ships.length));
+            console.log(shooter_index);
+            if (!this.spaceships.ships[shooter_index].firing.state) {
+               this.spaceships.ships[shooter_index].firing.state = true;
+               i++;
+            }
+         }
+      }
+
+      this.spaceships.ships.forEach(ship => {
+         ship.render()
+         ship.update();
+         ship.check_collision();
+
+         if (ship.exploded) despawn(ship, this.spaceships.ships);
       });
    }
 

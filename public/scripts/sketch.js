@@ -73,7 +73,7 @@ function draw() {
       trench.check_entry();
       trench.deploy();
 
-      if (!trench.spaceships.length) despawn(trench, trenches);
+      if (!trench.spaceships.ships.length) despawn(trench, trenches);
    });
 
    if (!trenches.length) {

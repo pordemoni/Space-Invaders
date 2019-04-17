@@ -14,7 +14,7 @@ class Enemy extends Spaceship{
             current: "MISSILE",
          },
          rate: 3,
-         state: true,
+         state: false,
       };
    }
 

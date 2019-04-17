@@ -36,7 +36,9 @@ function spawn_platoons(type, amount) {
 
             trench = new Trench(starting_side, y);
             trenches.push(trench);
+
             trench.spawn();
+            trench.assign_shooters();
          }
       
    }

@@ -47,7 +47,7 @@ class Space_Object {
 
                case "PLAYER":
                trenches.forEach(trench => {
-                  trench.spaceships.forEach(enemy => {
+                  trench.spaceships.ships.forEach(enemy => {
                      if (this.position.x <= (enemy.position.x + enemy.width) + this.width &&
                         this.position.x >= (enemy.position.x - enemy.width) - this.width &&
                         this.position.y <= (enemy.position.y + enemy.height) + this.height &&
