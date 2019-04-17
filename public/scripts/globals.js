@@ -28,6 +28,7 @@ let sfx = {
 let player;
 let projectiles = [];
 let trenches = [];
+let stars = [];
 
 // Settings
 p5.disableFriendlyErrors = true;

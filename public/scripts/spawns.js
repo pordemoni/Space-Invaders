@@ -1,3 +1,8 @@
+function despawn(space_object, list) {
+   const index = list.indexOf(space_object);
+   list.splice(index, 1);
+}
+
 /*  
 * spawn_projectile(origin):
    @param {object} origin - used to check the type of projectile to spawn
@@ -22,7 +27,7 @@ function spawn_projectile(origin) {
    }
 }
 
-function spawn_platoon(type, amount) {
+function spawn_platoons(type, amount) {
    switch (type) {
       case "TRENCH":
          for (let i = 0; i < amount; i++) {
@@ -35,4 +40,8 @@ function spawn_platoon(type, amount) {
          }
       
    }
+}
+
+function spawn_stars(amount) {
+   for (let i = 0; i < amount; i++) stars.push(new Star());
 }

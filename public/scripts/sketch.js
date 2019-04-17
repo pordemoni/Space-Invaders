@@ -29,17 +29,26 @@ function setup() {
 
    player = new Player(createVector(width / 2, height + 20));
 
-   spawn_platoon("TRENCH", settings.trench.count);
+   spawn_platoons("TRENCH", settings.trench.count);
+   spawn_stars(50);
 }
 
 function draw() {
    background(29, 44, 66);
+
+   stars.forEach(star => {
+      star.render();
+      star.update();
+   });
+
    textSize(32);
    fill(0, 255, 0);
    text(player.HP.current, 20, 40);
 
    fill(255, 255, 0);
    text(score, 140, 40);
+
+
 
    // * Projectiles
    projectiles.forEach(projectile => {
@@ -48,8 +57,7 @@ function draw() {
       projectile.check_edges();
       projectile.check_collision();
 
-      const index = projectiles.indexOf(projectile);
-      if (projectile.exploded) projectiles.splice(index, 1);
+      if (projectile.exploded) despawn(projectile, projectiles);
 
       projectile.update();
    });
@@ -65,13 +73,12 @@ function draw() {
       trench.check_entry();
       trench.deploy();
 
-      const index = trenches.indexOf(trench);
-      if (!trench.spaceships.length) trenches.splice(index, 1);
+      if (!trench.spaceships.length) despawn(trench, trenches);
    });
 
    if (!trenches.length) {
       settings.trench.count++;
-      spawn_platoon("TRENCH", settings.trench.count);
+      spawn_platoons("TRENCH", settings.trench.count);
    }
 
 }
