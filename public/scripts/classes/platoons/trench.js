@@ -1,5 +1,3 @@
-const enemy_width = 20;
-
 class Trench extends Platoon {
    constructor(starting_side, y) {
       super();
@@ -14,7 +12,7 @@ class Trench extends Platoon {
       this.spaceships = {
          max: 4,
          ships: [],
-         shooters: 2
+         shooters: GAME.difficulties[GAME.difficulty].trench.shooters,
       };
       this.spacing = {
          x: 80,

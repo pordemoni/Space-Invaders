@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>Document</title>
+</head>
+<body>
+   
+   <script>
+      class Person {
+         constructor(first_name, last_name) {
+            this.first_name = first_name;
+            this.last_name = last_name;
+         }
+         
+         get full_name() {
+            return `${this.first_name} ${this.last_name}`;
+         }
+
+         set full_name(name) {
+            const names = name.split(" ");
+            this.first_name = names[0];
+            this.last_name = names[1];
+         }
+      }   
+
+      const person = new Person("John", "Doe");
+
+      /* 
+      * Uses
+      person.full_name;                   // ? returns John Doe
+      person.full_name = "Jane Doe";      // ? sets person.full_name to "Jane Doe"
+      */
+   </script>
+   
+</body>
+</html>

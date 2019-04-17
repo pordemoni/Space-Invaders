@@ -3,7 +3,7 @@ class Enemy extends Spaceship{
       super(position);
       this.type = "ENEMY";
       this.velocity = velocity;
-      this.image = images.enemy.red;
+      this.image = GAME.images.enemy.red;
       this.width = 25;
       this.height = 18;
       this.exploded = false;

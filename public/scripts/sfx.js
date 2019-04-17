@@ -7,23 +7,23 @@
    ? This also pans the stereo values (left & right audio output) based on the x-position of the origin
  */
 
-function play_sfx(origin, event) {
-   let stereo_pan = map(origin.position.x, 0, width, -1, 1);
+function play_SFX(origin, event) {
+   const stereo_pan = map(origin.position.x, 0, width, -1, 1);
 
    switch (event) {
       case "FIRE":
          switch (origin.type) {
             case "PLAYER":
                {
-                  sfx.player.laser.pan(stereo_pan);
-                  sfx.player.laser.play();
+                  GAME.audio.SFX.player.laser.pan(stereo_pan);
+                  GAME.audio.SFX.player.laser.play();
                   break;
                }
 
             case "ENEMY":
                {
-                  sfx.enemy.missile.pan(stereo_pan);
-                  sfx.enemy.missile.play();
+                  GAME.audio.SFX.enemy.missile.pan(stereo_pan);
+                  GAME.audio.SFX.enemy.missile.play();
                   break;
                }
          }
@@ -33,24 +33,18 @@ function play_sfx(origin, event) {
          switch (origin.type) {
             case "PLAYER":
                {
-                  sfx.player.crash.pan(stereo_pan);
-                  sfx.player.crash.play();
+                  GAME.audio.SFX.player.crash.pan(stereo_pan);
+                  GAME.audio.SFX.player.crash.play();
                   break;
                }
 
             case "ENEMY":
                {
-                  sfx.enemy.crash.pan(stereo_pan);
-                  sfx.enemy.crash.play();
+                  GAME.audio.SFX.enemy.crash.pan(stereo_pan);
+                  GAME.audio.SFX.enemy.crash.play();
                   break;
                }
          }
          break;
-   }
-}
-
-function loadedBGM() {
-   if (bgm.state) {
-      bgm.track.loop();
    }
 }

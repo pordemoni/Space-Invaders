@@ -5,84 +5,86 @@
 */
 
 function preload() {
-   images.player = loadImage("../assets/images/spaceship-player.png");
-   images.enemy.black = loadImage("../assets/images/spaceship-enemy-black.png");
-   images.enemy.red = loadImage("../assets/images/spaceship-enemy-red.png");
-   bgm.track = loadSound("../assets/audio/bgm/rolemusic_may.mp3");
-   sfx.player.laser = loadSound("../assets/audio/sfx/player_laser.wav");
-   sfx.enemy.missile = loadSound("../assets/audio/sfx/enemy_missile.wav");
-   sfx.player.crash = loadSound("../assets/audio/sfx/player_hit.wav");
-   sfx.enemy.crash = loadSound("../assets/audio/sfx/enemy_hit.wav");
+  GAME.images.player = loadImage("../assets/images/spaceship-player.png");
+  GAME.images.enemy.black = loadImage("../assets/images/spaceship-enemy-black.png");
+  GAME.images.enemy.red = loadImage("../assets/images/spaceship-enemy-red.png");
+  GAME.audio.BGM.track = loadSound("../assets/audio/bgm/rolemusic_may.mp3");
+  GAME.audio.SFX.player.laser = loadSound("../assets/audio/sfx/player_laser.wav");
+  GAME.audio.SFX.enemy.missile = loadSound("../assets/audio/sfx/enemy_missile.wav");
+  GAME.audio.SFX.player.crash = loadSound("../assets/audio/sfx/player_hit.wav");
+  GAME.audio.SFX.enemy.crash = loadSound("../assets/audio/sfx/enemy_hit.wav");
 }
 
 function setup() {
-   createCanvas(document.body.clientWidth, window.innerHeight);
-   angleMode(DEGREES);
-   ellipseMode(RADIUS);
-   imageMode(CENTER);
-   rectMode(RADIUS);
-   noStroke();
+  createCanvas(document.body.clientWidth, window.innerHeight);
+  angleMode(DEGREES);
+  ellipseMode(RADIUS);
+  imageMode(CENTER);
+  rectMode(RADIUS);
+  noStroke();
 
-   if (bgm.state) {
-      bgm.track.loop();
-   }
+  if (GAME.audio.BGM.state) {
+    GAME.audio.BGM.track.loop();
+  }
 
-   player = new Player(createVector(width / 2, height + 20));
+  GAME.player = new Player(createVector(width / 2, height + 20));
 
-   spawn_platoons("TRENCH", settings.trench.count);
-   spawn_stars(50);
+  spawn_platoons("TRENCH", settings.trench.count);
+  spawn_stars(50);
 }
 
 function draw() {
-   background(29, 44, 66);
+  background(29, 44, 66);
 
-   stars.forEach(star => {
-      star.render();
-      star.update();
-   });
-
-   textSize(32);
-   fill(0, 255, 0);
-   text(player.HP.current, 20, 40);
-
-   fill(255, 255, 0);
-   text(score, 140, 40);
+  GAME.stars.forEach(star => {
+    star.render();
+    star.update();
+  });
 
 
 
-   // * Projectiles
-   projectiles.forEach(projectile => {
-      projectile.render();
-      projectile.set_direction();
-      projectile.check_edges();
-      projectile.check_collision();
+  // * Projectiles
+  GAME.projectiles.forEach(projectile => {
+    projectile.render();
+    projectile.set_direction();
+    projectile.check_edges();
+    projectile.check_collision();
 
-      if (projectile.exploded) despawn(projectile, projectiles);
+    if (projectile.exploded) despawn(projectile, GAME.projectiles);
 
-      projectile.update();
-   });
+    projectile.update();
+  });
 
-   // * Player
+  // * Player
 
-   player.render();
-   player.update();
+  GAME.player.render();
+  GAME.player.update();
 
-   // * Enemies
+  // * Enemies
 
-   trenches.forEach(trench => {
-      trench.check_entry();
-      trench.deploy();
+  GAME.platoons.forEach(platoon => {
+    platoon.check_entry();
+    platoon.deploy();
 
-      if (!trench.spaceships.ships.length) despawn(trench, trenches);
-   });
+    if (!platoon.spaceships.ships.length) despawn(platoon, GAME.platoons);
+  });
 
-   if (!trenches.length) {
-      settings.trench.count++;
-      spawn_platoons("TRENCH", settings.trench.count);
-   }
+  // ? Automatic respawn of platoons
+  if (!GAME.platoons.length) {
+    GAME.difficulties[GAME.difficulty].trench.count++;
+    spawn_platoons("TRENCH", GAME.difficulties[GAME.difficulty].trench.count);
+  }
+
+  // * HUD
+  textSize(32);
+  fill(0, 255, 0);
+  text(GAME.player.HP.current, 20, 40);
+
+  fill(255, 255, 0);
+  text(GAME.score, 140, 40);
 
 }
 
 function windowResized() {
-   resizeCanvas(document.body.clientWidth, window.innerHeight);
+  resizeCanvas(document.body.clientWidth, window.innerHeight);
 }

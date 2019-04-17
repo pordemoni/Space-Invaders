@@ -37,7 +37,7 @@ class Missile extends Projectile {
       if (!this.target_acquired) {
          switch (this.origin_type) {
             case "ENEMY":
-               let difference = p5.Vector.sub(player.position, this.position);
+               let difference = p5.Vector.sub(GAME.player.position, this.position);
                let direction = difference.normalize();
                this.velocity = direction.copy().mult(this.velocity.y);
                break;
