@@ -1,10 +1,13 @@
 const ESC = 27,
-      LEFT_SHIFT = 16,
-      SPACE = 32,
-      Z = 90;
+   LEFT_SHIFT = 16,
+   SPACE = 32,
+   Z = 90;
+
 
 function keyPressed(event) {
-  //  console.log(keyCode);
+   // console.log(keyCode);
+
+   // * Movement
    switch (keyCode) {
       case LEFT_ARROW:
          Game.player.boost_left();
@@ -30,16 +33,42 @@ function keyPressed(event) {
          break;
 
       case ESC:
-         if (Game.state == "PLAYING")  {
-            Game.set_state = "PAUSED";
+         if (Game.state == "PLAYING") {
+            Game.set_state("PAUSED");
             frameRate(0);
          }
-         else if (Game.state == "PAUSED")  {
-            Game.set_state = "PLAYING";
+         else if (Game.state == "PAUSED") {
+            Game.set_state("PLAYING");
             frameRate(60);
+
          }
+         console.log('Game.state:', Game.state)
          break;
    }
+
+   // switch (keyCode) {
+   //    case SPACE:
+   //       Game.player.set_firing_state(true);
+   //       break;
+
+   //    case LEFT_SHIFT:
+   //       Game.player.cycle_firing_mode();
+   //       break;
+   //    case Z:
+   //       Game.player.toggle_autopilot();
+   //       break;
+
+   //    case ESC:
+   //       if (Game.state == "PLAYING") {
+   //          Game.set_state = "PAUSED";
+   //          frameRate(0);
+   //       }
+   //       else if (Game.state == "PAUSED") {
+   //          Game.set_state = "PLAYING";
+   //          frameRate(60);
+   //       }
+   //       break;
+   // }
 }
 
 function keyReleased(event) {
@@ -63,5 +92,5 @@ function keyReleased(event) {
 }
 
 function mouseClicked(event) {
-  //  console.log(mouseX);
+   //  console.log(mouseX);
 }

@@ -51,5 +51,5 @@ function spawn_stars(amount) {
 function spawn_initiate() {
    Game.player = new Player(createVector(width / 2, height + 20));
    spawn_platoons("TRENCH", settings.trench.count);
-   spawn_stars(50);
+   // spawn_stars(50);
 }

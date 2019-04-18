@@ -60,7 +60,7 @@ p5.disableFriendlyErrors = true;
 const settings = {
    padding: {
       x: 40,
-      y: 40,
+      y: 80,
    },
    trench: {
       count: 1,
