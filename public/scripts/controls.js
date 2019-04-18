@@ -7,35 +7,35 @@ function keyPressed(event) {
   //  console.log(keyCode);
    switch (keyCode) {
       case LEFT_ARROW:
-         GAME.player.boost_left();
+         Game.player.boost_left();
          break;
       case RIGHT_ARROW:
-         GAME.player.boost_right();
+         Game.player.boost_right();
          break;
       case UP_ARROW:
-         GAME.player.boost_forward();
+         Game.player.boost_forward();
          break;
       case DOWN_ARROW:
-         GAME.player.boost_backward();
+         Game.player.boost_backward();
          break;
       case SPACE:
-         GAME.player.set_firing_state(true);
+         Game.player.set_firing_state(true);
          break;
 
       case LEFT_SHIFT:
-         GAME.player.cycle_firing_mode();
+         Game.player.cycle_firing_mode();
          break;
       case Z:
-         GAME.player.toggle_autopilot();
+         Game.player.toggle_autopilot();
          break;
 
       case ESC:
-         if (GAME.state == "PLAYING")  {
-            GAME.set_state = "PAUSED";
+         if (Game.state == "PLAYING")  {
+            Game.set_state = "PAUSED";
             frameRate(0);
          }
-         else if (GAME.state == "PAUSED")  {
-            GAME.set_state = "PLAYING";
+         else if (Game.state == "PAUSED")  {
+            Game.set_state = "PLAYING";
             frameRate(60);
          }
          break;
@@ -45,19 +45,19 @@ function keyPressed(event) {
 function keyReleased(event) {
    switch (keyCode) {
       case LEFT_ARROW:
-         GAME.player.apply_drag_left();
+         Game.player.apply_drag_left();
          break;
       case RIGHT_ARROW:
-         GAME.player.apply_drag_right();
+         Game.player.apply_drag_right();
          break;
       case UP_ARROW:
-         GAME.player.apply_drag_forward();
+         Game.player.apply_drag_forward();
          break;
       case DOWN_ARROW:
-         GAME.player.apply_drag_backward();
+         Game.player.apply_drag_backward();
          break;
       case SPACE:
-         GAME.player.set_firing_state(false);
+         Game.player.set_firing_state(false);
          break;
    }
 }

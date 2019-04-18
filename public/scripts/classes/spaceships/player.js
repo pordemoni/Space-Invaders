@@ -3,7 +3,7 @@ class Player extends Spaceship {
     super(position);
     this.type = "PLAYER";
     this.velocity = createVector(6, 6);
-    this.image = GAME.images.player;
+    this.image = Game.assets.images.player;
     this.width = 25;
     this.height = 27;
     this.firing = {

@@ -12,7 +12,7 @@ class Trench extends Platoon {
       this.spaceships = {
          max: 4,
          ships: [],
-         shooters: GAME.difficulties[GAME.difficulty].trench.shooters,
+         shooters: Game.difficulties[Game.difficulty].trench.shooters,
       };
       this.spacing = {
          x: 80,

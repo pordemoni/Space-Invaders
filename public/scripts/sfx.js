@@ -15,15 +15,15 @@ function play_SFX(origin, event) {
          switch (origin.type) {
             case "PLAYER":
                {
-                  GAME.audio.SFX.player.laser.pan(stereo_pan);
-                  GAME.audio.SFX.player.laser.play();
+                  Game.assets.audio.player_laser.pan(stereo_pan);
+                  Game.assets.audio.player_laser.play();
                   break;
                }
 
             case "ENEMY":
                {
-                  GAME.audio.SFX.enemy.missile.pan(stereo_pan);
-                  GAME.audio.SFX.enemy.missile.play();
+                  Game.assets.audio.enemy_missile.pan(stereo_pan);
+                  Game.assets.audio.enemy_missile.play();
                   break;
                }
          }
@@ -33,15 +33,15 @@ function play_SFX(origin, event) {
          switch (origin.type) {
             case "PLAYER":
                {
-                  GAME.audio.SFX.player.crash.pan(stereo_pan);
-                  GAME.audio.SFX.player.crash.play();
+                  Game.assets.audio.player_crash.pan(stereo_pan);
+                  Game.assets.audio.player_crash.play();
                   break;
                }
 
             case "ENEMY":
                {
-                  GAME.audio.SFX.enemy.crash.pan(stereo_pan);
-                  GAME.audio.SFX.enemy.crash.play();
+                  Game.assets.audio.enemy_crash.pan(stereo_pan);
+                  Game.assets.audio.enemy_crash.play();
                   break;
                }
          }

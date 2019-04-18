@@ -22,19 +22,19 @@ class Space_Object {
       // ?  Player to Enemy collision
 
       case "ENEMY":
-        if (this.position.x <= (GAME.player.position.x + GAME.player.width) + this.width &&
-          this.position.x >= (GAME.player.position.x - GAME.player.width) - this.width &&
-          this.position.y <= (GAME.player.position.y + GAME.player.height) + this.height &&
-          this.position.y >= (GAME.player.position.y - GAME.player.height) - this.height &&
-          !GAME.player.shield.state
+        if (this.position.x <= (Game.player.position.x + Game.player.width) + this.width &&
+          this.position.x >= (Game.player.position.x - Game.player.width) - this.width &&
+          this.position.y <= (Game.player.position.y + Game.player.height) + this.height &&
+          this.position.y >= (Game.player.position.y - Game.player.height) - this.height &&
+          !Game.player.shield.state
         ) {
           this.exploded = true;
-          if (GAME.player.HP.current > 0) {
+          if (Game.player.HP.current > 0) {
             play_SFX(this, "CRASH");
-            play_SFX(GAME.player, "CRASH");
-            GAME.player.HP.current--;
-            GAME.player.shield.activate();
-            GAME.score++;
+            play_SFX(Game.player, "CRASH");
+            Game.player.HP.current--;
+            Game.player.shield.activate();
+            Game.score++;
           }
         }
         break;
@@ -46,7 +46,7 @@ class Space_Object {
           // ? Player's Projectile to Enemy collision
 
           case "PLAYER":
-            GAME.platoons.forEach(platoon => {
+            Game.platoons.forEach(platoon => {
               platoon.spaceships.ships.forEach(ship => {
                 if (this.position.x <= (ship.position.x + ship.width) + this.width &&
                   this.position.x >= (ship.position.x - ship.width) - this.width &&
@@ -56,7 +56,7 @@ class Space_Object {
                   this.exploded = true;
                   ship.exploded = true;
                   play_SFX(ship, "CRASH");
-                  GAME.score++;
+                  Game.score++;
                 }
               })
             });
@@ -65,16 +65,16 @@ class Space_Object {
           // ? Enemy's Projectile to GAME.player collision
 
           case "ENEMY":
-            if (this.position.x <= (GAME.player.position.x + GAME.player.width) + this.width &&
-              this.position.x >= (GAME.player.position.x - GAME.player.width) - this.width &&
-              this.position.y <= (GAME.player.position.y + GAME.player.height) + this.height &&
-              this.position.y >= (GAME.player.position.y - GAME.player.height) - this.height
+            if (this.position.x <= (Game.player.position.x + Game.player.width) + this.width &&
+              this.position.x >= (Game.player.position.x - Game.player.width) - this.width &&
+              this.position.y <= (Game.player.position.y + Game.player.height) + this.height &&
+              this.position.y >= (Game.player.position.y - Game.player.height) - this.height
             ) {
               this.exploded = true;
-              if (!GAME.player.shield.state && GAME.player.HP.current > 0) {
-                GAME.player.shield.activate();
-                GAME.player.HP.current--;
-                play_SFX(GAME.player, "CRASH");
+              if (!Game.player.shield.state && Game.player.HP.current > 0) {
+                Game.player.shield.activate();
+                Game.player.HP.current--;
+                play_SFX(Game.player, "CRASH");
               }
             }
         }

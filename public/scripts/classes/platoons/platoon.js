@@ -49,7 +49,6 @@ class Platoon {
 
     while (i < this.spaceships.shooters) {
       let shooter_index = Math.floor(random(this.spaceships.ships.length));
-      console.log(shooter_index);
       if (!this.spaceships.ships[shooter_index].firing.state) {
         this.spaceships.ships[shooter_index].firing.state = true;
         i++;
