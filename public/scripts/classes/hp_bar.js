@@ -13,6 +13,7 @@ class HP_Bar {
             y: this.position.y + this.height / 2,
          },
          value: `${Game.player.HP.current} / ${Game.player.HP.default}`,
+         size: 20,
       };
    }
 
@@ -28,7 +29,7 @@ class HP_Bar {
 
       //* Text
       fill(255, 255);
-      textSize(16);
+      textSize(this.text.size);
       textAlign(CENTER, CENTER);
       textFont(this.font);
       text(this.text.value, this.text.position.x, this.text.position.y);
