@@ -9,7 +9,6 @@
 
 function play_SFX(origin, event) {
    const stereo_pan = map(origin.position.x, 0, width, -1, 1);
-
    switch (event) {
       case "FIRE":
          switch (origin.type) {
@@ -34,6 +33,7 @@ function play_SFX(origin, event) {
             case "PLAYER":
                {
                   Game.assets.audio.player_crash.pan(stereo_pan);
+                  Game.assets.audio.player_crash.setVolume(2);
                   Game.assets.audio.player_crash.play();
                   break;
                }

@@ -21,14 +21,20 @@ let Game = {
    assets: {
        audio: {
           BGM: null,
-          player_laser: null,
-          player_crash: null,
           enemy_missile: null,
           enemy_crash: null,
+          player_laser: null,
+          player_crash: null,
+       },
+       fonts: {
+         baby_blocks: null,
+         blox: null,
+         minecraft_8px: null,
+         minecraft_16px: null,
        },
        images: {
-          player: null,
           enemy: null,
+          player: null,
        },
     },
 
@@ -39,13 +45,17 @@ let Game = {
       },
       progress: 0,
       paths: [
-         "../assets/images/player.png",
-         "../assets/images/enemy.png",
          "../assets/audio/BGM.mp3",
          "../assets/audio/player_laser.wav",
          "../assets/audio/player_crash.wav",
          "../assets/audio/enemy_missile.wav",
          "../assets/audio/enemy_crash.wav",
+         // "../assets/fonts/baby_blocks.ttf",
+         "../assets/fonts/blox.ttf",
+         "../assets/fonts/minecraft_8px.ttf",
+         "../assets/fonts/minecraft_16px.ttf",
+         "../assets/images/player.png",
+         "../assets/images/enemy.png",
       ],
    },
 

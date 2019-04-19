@@ -22,6 +22,10 @@ function preload_assets() {
             loadSound(path, loaded_asset);
             break;
 
+         case "fonts":
+            loadFont(path, loaded_asset);
+            break;
+            
          case "images":
             loadImage(path, loaded_asset);
             break;

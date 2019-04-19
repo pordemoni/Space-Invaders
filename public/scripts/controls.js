@@ -25,14 +25,13 @@ function keyPressed(event) {
          Game.player.set_firing_state(true);
          break;
 
-      case LEFT_SHIFT:
-         Game.player.cycle_firing_mode();
-         break;
+      // case LEFT_SHIFT:
+      //    Game.player.cycle_firing_mode();
+      //    break;
       case Z:
          Game.player.toggle_autopilot();
          break;
-
-      case ESC:
+      case LEFT_SHIFT:
          if (Game.state == "PLAYING") {
             Game.set_state("PAUSED");
             frameRate(0);

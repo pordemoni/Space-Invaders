@@ -1,10 +1,13 @@
 function play_game() {
    background(29, 44, 66);
+
+   //* Stars
    Game.stars.forEach(star => {
       star.render();
       star.update();
    });
 
+   //* Bullets
    Game.projectiles.forEach(projectile => {
       projectile.render();
       projectile.set_direction();
@@ -16,9 +19,11 @@ function play_game() {
       projectile.update();
    });
 
+   //* Player
    Game.player.render();
    Game.player.update();
 
+   //* Enemies
    Game.platoons.forEach(platoon => {
       platoon.check_entry();
       platoon.deploy();
@@ -26,15 +31,12 @@ function play_game() {
       if (!platoon.spaceships.ships.length) despawn(platoon, Game.platoons);
    });
 
+   //* Enemy auto-respawn
    if (!Game.platoons.length) {
       Game.difficulties[Game.difficulty].trench.count++;
       spawn_platoons("TRENCH", Game.difficulties[Game.difficulty].trench.count);
    }
 
-   textSize(32);
-   fill(0, 255, 0);
-   text(Game.player.HP.current, 20, 40);
-
-   fill(255, 255, 0);
-   text(Game.score, 140, 40);
+   //* HUD
+   display_HUD();
 }
